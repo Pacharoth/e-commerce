@@ -8,11 +8,10 @@ let RedisStore = require('connect-redis')(session);
 let redisClient=redis.createClient();
 const path = require('path');
 const bodyParser= require("body-parser");
-
+const router = require('./routes/product')
 
 app.set('view engine','ejs');
 app.set('views','views');
-
 
 app.use(cookieParser());
 app.use(session({
@@ -26,6 +25,10 @@ app.use(session({
     },
     name:"sid",
 }))
+app.use(express.static(path.join(__dirname,"public")))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(router)
 
 mongoose.connect("mongodb://localhost:27017/ecommerce?readPreference=primary&appname=MongoDB%20Compass&ssl=false").then(result=>{
     console.log("DB is connected");

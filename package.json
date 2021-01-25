@@ -1,0 +1,19 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Assignment ecommerce nothing else",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pacharoth/e-commerce.git"
+  },
+  "author": "Pacharoth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pacharoth/e-commerce/issues"
+  },
+  "homepage": "https://github.com/Pacharoth/e-commerce#readme"
+}

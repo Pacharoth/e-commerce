@@ -4,8 +4,12 @@
   "description": "Assignment ecommerce nothing else",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> 7051da10fb48117d5c1fa963eaf3adff55a93686
   },
   "repository": {
     "type": "git",
@@ -16,6 +20,7 @@
   "bugs": {
     "url": "https://github.com/Pacharoth/e-commerce/issues"
   },
+<<<<<<< HEAD
   "homepage": "https://github.com/Pacharoth/e-commerce#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -30,4 +35,7 @@
     "path": "^0.12.7",
     "redis": "^3.0.2"
   }
+=======
+  "homepage": "https://github.com/Pacharoth/e-commerce#readme"
+>>>>>>> 7051da10fb48117d5c1fa963eaf3adff55a93686
 }

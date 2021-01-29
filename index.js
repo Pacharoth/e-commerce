@@ -8,8 +8,9 @@ let RedisStore = require('connect-redis')(session);
 let redisClient=redis.createClient();
 const path = require('path');
 const bodyParser= require("body-parser");
-const router = require('./routes/product')
-
+const routerUser = require('./routes/user')
+const fs = require('fs');
+const fileUpload =require('express-fileupload');
 app.set('view engine','ejs');
 app.set('views','views');
 
@@ -25,10 +26,14 @@ app.use(session({
     },
     name:"sid",
 }))
+app.use(fileUpload({
+    limits:{fileSize:200*1024*1024}
+}))
 app.use(express.static(path.join(__dirname,"public")))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(router)
+
+app.use(routerUser);
 
 mongoose.connect("mongodb://localhost:27017/ecommerce?readPreference=primary&appname=MongoDB%20Compass&ssl=false").then(result=>{
     console.log("DB is connected");

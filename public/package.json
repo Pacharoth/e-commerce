@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "axios": "^0.21.1",
-    "bootstrap": "^5.0.0-beta1"
+    "materialize-css": "^1.0.0-rc.2"
   }
 }

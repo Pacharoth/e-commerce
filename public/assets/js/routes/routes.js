@@ -1,11 +1,12 @@
 function routes(){
-    if(window.location.pathname=='/'){
+    let path = window.location.pathname
+    if(path=="/"){
         const dom = document.createElement('a')
         document.body.appendChild(dom)
     }
-    else{
-        const nah = document.createElement('p');
-        document.body.appendChild(nah)
+    else if(path == "/login" || path == "/signup"){
+
+        document.querySelector("#root").innerHTML=UILoginSigup.loadUILogin()
     }
 }
-routes();
+window.addEventListener("load",routes)

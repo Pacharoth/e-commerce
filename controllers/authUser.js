@@ -34,7 +34,7 @@ exports.registerUser = async(req,res)=>{
     });
     await userAccount.save().then(result=>{
         console.log("successful saved");
-        res.json({"success":true,"email":false})
+        res.json({"success":true})
 
     }).catch(err=>{
         console.log(err);

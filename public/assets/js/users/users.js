@@ -22,11 +22,14 @@ class UILoginSigup{
                         <div class="input-field">
                             <input type="text" id="email" name="email" >
                             <label for="email">Email Address</label>
-                            
+                        </div>
+                        <div class="input-field" id="usernamelog">
                         </div>
                         <div class="input-field">
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password">
+                        </div>
+                        <div class="input-field" id="passwordlog">
                         </div>
                         <div class="input-field ">
                             <p>
@@ -52,7 +55,8 @@ class UILoginSigup{
                         account, it takes less than a minute</p>
                     </div>
                     <div class="card-content">
-                        
+                        <div class="input-field" id="resultre">
+                        </div>
                         <div class="input-field">
                             <input type="text" required id="usernamere" name="username" >
                             <label for="usernamere">Username</label>
@@ -83,7 +87,7 @@ class UILoginSigup{
                         <div class="input-field ">
                             <p>
                                 <label>
-                                <input type="checkbox" required/>
+                                <input type="checkbox" required name="check"/>
                                 <span>I accept Terms and Condition</span>
                                 </label>
                             </p>
@@ -109,85 +113,89 @@ class UILoginSigup{
         
         return `<span class="grey white-text wave-dark col s12" style="padding:2%; margin-bottom:2%">${value}</span>`
     }
-    static checkpassword(password){
+    static termsDOM(value){
+        return `<span class="red lighten-1 white-text wave-dark col s12" style="padding:2%; margin-bottom:2%">${value}</span>`
+    }
+    static agreeDOM(value){
+        return `<span class="green darken-1 white-text wave-dark col s12" style="padding:2%; margin-bottom:2%">${value}</span>`  
+    }
+    static reduceDOM(DOM){
+        let dom = document.getElementById(DOM);
+        dom.style.display="inline";
+        return dom
+    }
+    static disagreeAllDOM(DOM,message){
+        let dom = this.reduceDOM(DOM)
+        dom.innerHTML = this.termsDOM(message)
+        this.clearDOM(dom);
+    }
+    static agreeAllDOM(DOM,message){
+        let dom = this.reduceDOM(DOM)
+        dom.innerHTML = this.agreeAllDOM(message)
+        this.clearDOM(dom);
+    }
+    static validateAllDom(DOM,message){
+        let dom = this.reduceDOM(DOM);
+        dom.innerHTML = this.validateDOM(message);
+        this.clearDOM(dom);
+    }
+    static checkpassword(password,dom){
         let lowercase = new RegExp("^(?=.*[a-z])");
         let uppercase = new RegExp("^(?=.*[A-Z])");
         let numeric = new RegExp("^(?=.*[0-9])");
         let specialchar = new RegExp("^(?=.*[!@#$%^&*])");
         let length = new RegExp("^(?=.{8,})");
-        let rawpassword = document.getElementById("ppassword")
-        if(!lowercase.test(password)){
-            rawpassword.style.display="inline";
-            rawpassword.innerHTML=this.validateDOM("The password must contain at least 1 lowercase character");
-            this.clearDOM(rawpassword);
+        if(!lowercase.test(password,dom)){
+            this.validateAllDom(dom,"The password must contain at least 1 lowercase character")
             return false;
         }
         else if(!uppercase.test(password)){
-            rawpassword.style.display="inline";
-            rawpassword.innerHTML=this.validateDOM("The password must contain at least 1 uppercase character");
-            this.clearDOM(rawpassword);
-            
+            this.validateAllDom(dom,"The password must contain at least 1 uppercase character")
             return false;
         }
         else if(!numeric.test(password)){
-            rawpassword.style.display="inline";
-            rawpassword.innerHTML=this.validateDOM("The password must contain at least 1 numeric character");
-            this.clearDOM(rawpassword);
+            this.validateAllDom(dom,"The password must contain at least 1 numeric character")
             return false;
         }else if(!length.test(password)){
-            rawpassword.style.display="inline";
-            rawpassword.innerHTML=this.validateDOM("The password must contain 8 characters");
-            this.clearDOM(rawpassword);
+            this.validateAllDom(dom,"The password must contain 8 characters");
             return false;
         }
-        
         return true;
     }
     static checkConfirmPassword(password,confirmpassword){
         console.log(confirmpassword,password)
         if(confirmpassword!=password){
-            let checkpassword = document.getElementById("pcpassword");
-            checkpassword.style.display="inline";
-            checkpassword.innerHTML=this.validateDOM("Password mismatch");
-            this.clearDOM(checkpassword)
+            this.validateAllDom("pcpassword","Password mismatch");
             return false;
         }
         return true
     }
-    static ValidateEmail(mail) 
+    static ValidateEmail(mail,dom) 
     {
         let checkEmail = new RegExp("/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/")
         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
         {
             return (true)
         }
-        let eemail = document.getElementById("eemail");
-        eemail.innerHTML=this.validateDOM("Email Invalid");
-        this.clearDOM(eemail)
+        this.validateAllDom(dom,"Email Invalid");
         return (false)
     }
     static checkUser(user){
-        let uusername = document.getElementById("uusername")
         if(!user){
-            uusername.style.display="inline";
-            uusername.innerHTML = this.validateDOM("Username has been taken! Please change username");
-            this.clearDOM(uusername)
+            this.validateAllDom("uusername","Username has been taken! Please change username")
             return false;
         }
         return true;
     }
     static checkEmail(email){
-        let eemail = document.getElementById("eemail")
         if(!email){
-            eemail.style.display="inline";
-            eemail.innerHTML = this.validateDOM("Email already axisted");
-            this.clearDOM(eemail)
+            this.validateAllDom("eemail","Email already axisted");
             return false;
         }
         return true;
     }
     static handleSignIn(){
-
+        
     }
     static async handleSignUp(event){
         event.preventDefault();
@@ -198,16 +206,13 @@ class UILoginSigup{
             dataSubmit[pair[0]]=pair[1];
         }
         console.log(dataSubmit);
-        let pass = this.checkpassword(dataSubmit.password)
+        let pass = this.checkpassword(dataSubmit.password,"ppassword")
         let confpass = this.checkConfirmPassword(dataSubmit.password,dataSubmit.confirmpassword)
-        let email = this.ValidateEmail(dataSubmit.email);
-        console.log(email)
+        let email = this.ValidateEmail(dataSubmit.email,"eemail");
         let checkuser={}
         if(email==true){
             await axios.post("/checkemail",dataSubmit).then(result=>{
-                console.log(result)
                 checkuser["email"]=result.data.email;
-                
             }).catch(err=>{
                 checkuser["email"] =err;
             })
@@ -221,14 +226,27 @@ class UILoginSigup{
             checkuser["username"]=err;
         })
         checkuser.username = this.checkUser(checkuser.username);
-        if(checkuser.username&&checkuser.email&&confpass&&pass){
-            await axios.post('/register',dataSubmit).then(
-                result=>{
-                    console.log("success");
-                }
-            ).catch(err=>{
-                console.log("error");
-            })
+        if(dataSubmit.check=="on"){
+            if(checkuser.username&&checkuser.email&&confpass&&pass){
+                await axios.post('/register',dataSubmit).then(
+                    async(result)=>{
+                        console.log(result.data)
+                        let dom = document.getElementById("resultre");
+                        dom.style.display="inline";
+                        if(result.data.success){
+                            dom.innerHTML=this.agreeDOM(`${dataSubmit.username} has been created`);
+                            this.clearDOM(dom);
+                        }
+                        else{
+                           dom.innerHTML=this.agreeDOM(`${dataSubmit.username} can't created`)
+                        }
+                    }
+                ).catch(err=>{
+                    console.log(err);
+                })
+            }
+        }else{
+            this.disagreeAllDOM("resultre","You haven't to agree terms and condition! Please check agreement");
         }
     }
     static clearDOM(value){

@@ -7,7 +7,7 @@ class LoginSignup{
 class UILoginSigup{
     static loadUILogin(){
         return `        <div class="row content">
-        <form action="/login" method="POST">
+        <form action="/login" method="POST" id="Login">
             <div class="col s12 m6 " >
                 <div class="card z-depth-5 form-field" style="border-radius:10px">
                     <div class="card-action blue lighten-1 white-text center-align">
@@ -19,11 +19,13 @@ class UILoginSigup{
                         
                     </div>
                     <div class="card-content">
+                        <div class="input-field" id="resultlog">
+                        </div>
                         <div class="input-field">
                             <input type="text" id="email" name="email" >
                             <label for="email">Email Address</label>
                         </div>
-                        <div class="input-field" id="usernamelog">
+                        <div class="input-field" id="emaillog">
                         </div>
                         <div class="input-field">
                             <label for="password">Password</label>
@@ -40,7 +42,7 @@ class UILoginSigup{
                             </p>
                         </div>
                         <div class="input-field">
-                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" style="width: 100%; border-radius:10px">Login</button>
+                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" type="button" onclick="UILoginSigup.handleSignIn(event)" style="width: 100%; border-radius:10px">Login</button>
                         </div>
                     </div>
                 </div>
@@ -194,7 +196,46 @@ class UILoginSigup{
         }
         return true;
     }
-    static handleSignIn(){
+    static async handleSignIn(event){
+        event.preventDefault();
+        let form = document.querySelector("#Login")
+        let Form = new FormData(form);
+        let dataSubmit={}
+        for (const pair of Form) {
+            dataSubmit[pair[0]]=pair[1];
+        }
+        console.log(dataSubmit)
+        let checkemail = this.ValidateEmail(dataSubmit.email,"emaillog");
+        let checkpassword = this.checkpassword(dataSubmit.password,"passwordlog")
+        if(checkpassword&&checkemail){
+            await axios.post('/login',dataSubmit).then(result=>{
+                let respone=result.data
+                console.log(respone)
+                if(respone.user&&respone.password){
+                    document.title = "Dashboard"
+                    // document.body.innerHTML= 
+                    history.pushState({id:1},"Dashboard","/")
+                    
+                }else{
+                    if(!respone.user){
+                        let dom = document.getElementById("emaillog")
+                        dom.style.display="inline";
+                        dom.innerHTML=this.termsDOM("Can't find Email! Please try again!");
+                        this.clearDOM(dom)
+                    }if(!respone.email){
+                        let dom = document.getElementById("passwordlog")
+                        dom.style.display="inline";
+                        dom.innerHTML=this.termsDOM("Wrong Password! Please try again!");
+                        this.clearDOM(dom)
+                    }
+                }
+            }).catch(err=>{
+                let dom = document.getElementById("resultlog");
+                dom.style.display="inline";
+                dom.innerHTML=this.agreeDOM(`No ${dataSubmit.username}! Please try again`);
+                this.clearDOM(dom);
+            })
+        }
         
     }
     static async handleSignUp(event){
@@ -238,7 +279,8 @@ class UILoginSigup{
                             this.clearDOM(dom);
                         }
                         else{
-                           dom.innerHTML=this.agreeDOM(`${dataSubmit.username} can't created`)
+                           dom.innerHTML=this.agreeDOM(`${dataSubmit.username} can't created`);
+                           this.clearDOM(dom)
                         }
                     }
                 ).catch(err=>{

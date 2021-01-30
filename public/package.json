@@ -11,8 +11,6 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
     "axios": "^0.21.1",
-    "jquery": "^3.5.1",
-    "materialize-css": "^1.0.0-rc.2",
-    "slicker": "0.0.2"
+    "materialize-css": "^1.0.0-rc.2"
   }
 }

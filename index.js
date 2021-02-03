@@ -2,6 +2,7 @@ const express = require('express');
 const session =  require('express-session');
 const app = express();
 const redis = require('redis');
+const cors=require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 let RedisStore = require('connect-redis')(session);
@@ -16,7 +17,6 @@ const routeProduct = require('./routes/product');
 const fileUpload =require('express-fileupload');
 app.set('view engine','ejs');
 app.set('views','views');
-
 app.use(cookieParser());
 app.use(session({
     store: new RedisStore({client:redisClient}),
@@ -29,6 +29,7 @@ app.use(session({
     },
     name:"sid",
 }))
+app.use(cors());
 app.use(fileUpload({
     limits:{fileSize:200*1024*1024}
 }))

@@ -74,3 +74,9 @@ exports.logout=async(req,res)=>{
     req.clearCookie('username')
     res.redirect("/");
 }
+exports.getSession=async(req,res,next)=>{
+    console.log(req.session);
+    if(req.session.userId)res.json({session:req.session.userId})
+    else res.json({session:false})
+    
+}

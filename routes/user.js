@@ -8,4 +8,5 @@ route.post('/login',routeUser.loginUser);
 route.post('/checkuser',routeUser.getUser);
 route.post('/logout',routeUser.logout);
 route.post('/checkemail',routeUser.getEmail);
+route.post('/session',routeUser.getSession);
 module.exports = route;

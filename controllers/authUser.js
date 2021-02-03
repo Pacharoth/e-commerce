@@ -5,7 +5,7 @@ exports.getDashboard = async(req,res)=>{
 }
 exports.loginUser = async(req,res)=>{
     let request= req.body;
-    console.log(request)
+    console.log(request)    
     await user.findOne({email:request.email}).then(result=>{
         if(result){
             bcrypt.compare(request.password,result.password).then(
@@ -18,7 +18,6 @@ exports.loginUser = async(req,res)=>{
                     }else{
                         res.json({password:false,user:true})
                     }
-
                 }
             ).catch(err=>{
                 console.log(err);
@@ -69,4 +68,9 @@ exports.getUser = async(req,res)=>{
     }).catch(err=>{
         res.json({username:true})
     })
+}
+exports.logout=async(req,res)=>{
+    req.session.destroy();
+    req.clearCookie('username')
+    res.redirect("/");
 }

@@ -1,10 +1,10 @@
 
 function routes(){
     let path = window.location.pathname
-    
-    if(path=="/"){
-        const dom = document.createElement('a')
-        document.body.appendChild(dom)
+    let rootDOM = getElById("root");
+    if(path=="/admin"){
+        document.title = "Admin"
+        rootDOM.innerHTML=Admin.loadUIProduct();
     }
     else if(path == "/login" || path == "/signup"){
         if(path=="/login"){
@@ -14,8 +14,7 @@ function routes(){
             document.title="SignUp"
             // history.pushState({},"SignUp")
         }
-        document.querySelector("#root").innerHTML=UILoginSigup.loadUILogin();
+        rootDOM.innerHTML = LoginSigup.loadUILoginSignUp();
     }
 }
-
 routes();

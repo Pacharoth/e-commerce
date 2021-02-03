@@ -1,11 +1,6 @@
-class LoginSignup{
-    constructor(email,password){
-        this.email=email;
-        this.password = password;
-    }
-}
-class UILoginSigup{
-    static loadUILogin(){
+
+class LoginSigup{
+    static loadUILoginSignUp(){
         return `        <div class="row content">
         <form action="/login" method="POST" id="Login">
             <div class="col s12 m6 " >
@@ -42,7 +37,7 @@ class UILoginSigup{
                             </p>
                         </div>
                         <div class="input-field">
-                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" type="button" onclick="UILoginSigup.handleSignIn(event)" style="width: 100%; border-radius:10px">Login</button>
+                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" type="button" onclick="LoginSigup.handleSignIn(event)" style="width: 100%; border-radius:10px">Login</button>
                         </div>
                     </div>
                 </div>
@@ -95,7 +90,7 @@ class UILoginSigup{
                             </p>
                         </div>
                         <div class="input-field">
-                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" type="click" onclick="UILoginSigup.handleSignUp(event)" style="width: 100%; border-radius:10px">Sign up</button>
+                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" type="click" onclick="LoginSigup.handleSignUp(event)" style="width: 100%; border-radius:10px">Sign up</button>
                         </div>
                     </div>
                 </div>
@@ -147,7 +142,10 @@ class UILoginSigup{
         let numeric = new RegExp("^(?=.*[0-9])");
         let specialchar = new RegExp("^(?=.*[!@#$%^&*])");
         let length = new RegExp("^(?=.{8,})");
-        if(!lowercase.test(password,dom)){
+        if(password==""){
+            this.validateAllDom(dom,"Please insert password! Password require!")
+        }
+        else if(!lowercase.test(password,dom)){
             this.validateAllDom(dom,"The password must contain at least 1 lowercase character")
             return false;
         }
@@ -166,7 +164,11 @@ class UILoginSigup{
     }
     static checkConfirmPassword(password,confirmpassword){
         console.log(confirmpassword,password)
-        if(confirmpassword!=password){
+        if(confirmpassword==""){
+            this.validateAllDom("pcpassword","Please insert Confirm password! Confirm password is required!")
+            return false;
+        }
+        else if(confirmpassword!=password){
             this.validateAllDom("pcpassword","Password mismatch");
             return false;
         }
@@ -174,20 +176,29 @@ class UILoginSigup{
     }
     static ValidateEmail(mail,dom) 
     {
-        let checkEmail = new RegExp("/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/")
-        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+        if(mail==""){
+            this.validateAllDom(dom,"Please insert email! Email is required")
+            return false
+        }
+        else if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
         {
             return (true)
         }
         this.validateAllDom(dom,"Email Invalid");
-        return (false)
+        return (false);
     }
-    static checkUser(user){
+    static checkUserExisted(user){
         if(!user){
             this.validateAllDom("uusername","Username has been taken! Please change username")
             return false;
         }
         return true;
+    }
+    static checkUser(username){
+        if(username==""){
+            this.validateAllDom("uusername","Username is required");
+            return false;
+        }
     }
     static checkEmail(email){
         if(!email){
@@ -198,13 +209,7 @@ class UILoginSigup{
     }
     static async handleSignIn(event){
         event.preventDefault();
-        let form = document.querySelector("#Login")
-        let Form = new FormData(form);
-        let dataSubmit={}
-        for (const pair of Form) {
-            dataSubmit[pair[0]]=pair[1];
-        }
-        console.log(dataSubmit)
+        let dataSubmit = serializer("#Login")
         let checkemail = this.ValidateEmail(dataSubmit.email,"emaillog");
         let checkpassword = this.checkpassword(dataSubmit.password,"passwordlog")
         if(checkpassword&&checkemail){
@@ -213,21 +218,20 @@ class UILoginSigup{
                 console.log(respone)
                 if(respone.user&&respone.password){
                     document.title = "Dashboard"
-                    // document.body.innerHTML= 
-                    history.pushState({id:1},"Dashboard","/")
-                    
-                }else{
-                    if(!respone.user){
+                    history.pushState({},"Dashboard","/")
+                    let rootDom =getElById("root")
+                    rootDom.innerHTML=Admin.loadUIProduct();
+                }
+                else if(!respone.user){
                         let dom = document.getElementById("emaillog")
                         dom.style.display="inline";
                         dom.innerHTML=this.termsDOM("Can't find Email! Please try again!");
                         this.clearDOM(dom)
-                    }if(!respone.email){
+                }else if(!respone.email){
                         let dom = document.getElementById("passwordlog")
                         dom.style.display="inline";
                         dom.innerHTML=this.termsDOM("Wrong Password! Please try again!");
                         this.clearDOM(dom)
-                    }
                 }
             }).catch(err=>{
                 let dom = document.getElementById("resultlog");
@@ -240,12 +244,7 @@ class UILoginSigup{
     }
     static async handleSignUp(event){
         event.preventDefault();
-        let form = document.querySelector("#Register")
-        let Form = new FormData(form);
-        let dataSubmit={}
-        for (const pair of Form) {
-            dataSubmit[pair[0]]=pair[1];
-        }
+        let dataSubmit=serializer("#Register");
         console.log(dataSubmit);
         let pass = this.checkpassword(dataSubmit.password,"ppassword")
         let confpass = this.checkConfirmPassword(dataSubmit.password,dataSubmit.confirmpassword)
@@ -260,13 +259,14 @@ class UILoginSigup{
             checkuser.email=this.checkEmail(checkuser.email)
             console.log(checkuser)
         }
-        
+        checkuser.username = this.checkUser(dataSubmit.username)
         await axios.post("/checkuser",dataSubmit).then(result=>{
             checkuser["username"]=result.data.username;
         }).catch(err=>{
             checkuser["username"]=err;
         })
-        checkuser.username = this.checkUser(checkuser.username);
+        checkuser.username = this.checkUserExisted(dataSubmit.username);
+
         if(dataSubmit.check=="on"){
             if(checkuser.username&&checkuser.email&&confpass&&pass){
                 await axios.post('/register',dataSubmit).then(

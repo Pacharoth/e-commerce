@@ -9,12 +9,11 @@ function routes(){
     else if(path == "/login" || path == "/signup"){
         if(path=="/login"){
             document.title="LoginPage"
-            // history.pushState({},"LoginPage")
         }else{
             document.title="SignUp"
-            // history.pushState({},"SignUp")
         }
         rootDOM.innerHTML = LoginSigup.loadUILoginSignUp();
     }
 }
 routes();
+window.onpopstate = routes; // keep track on url and fix about refresh page and other stuff.

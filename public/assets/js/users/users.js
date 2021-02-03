@@ -218,9 +218,8 @@ class LoginSigup{
                 console.log(respone)
                 if(respone.user&&respone.password){
                     document.title = "Dashboard"
-                    history.pushState({},"Dashboard","/")
-                    let rootDom =getElById("root")
-                    rootDom.innerHTML=Admin.loadUIProduct();
+                    history.pushState({},"Dashboard","/admin")
+                    routes();
                 }
                 else if(!respone.user){
                         let dom = document.getElementById("emaillog")

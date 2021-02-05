@@ -31,14 +31,15 @@ app.use(session({
 }))
 app.use(cors());
 app.use(fileUpload({
-    limits:{fileSize:200*1024*1024}
-}))
+    limits: { fileSize: 50* 1024 * 1024}
+  }));
 app.use(express.static(path.join(__dirname,"public")))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(upload.array());
+// app.use(upload.array());
+
 app.use(routerUser);
-app.use(routeProduct)
+app.use(routeProduct);
 mongoose.connect("mongodb://localhost:27017/ecommerce?readPreference=primary&appname=MongoDB%20Compass&ssl=false").then(result=>{
     console.log("DB is connected");
 

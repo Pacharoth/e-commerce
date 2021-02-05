@@ -1,7 +1,9 @@
 const express = require('express');
+const fileUpload = require('express-fileupload')
 const route = express.Router();
-const multer = require('multer')
-const upload = multer({des:'storage/'})
 const productController = require('../controllers/productController')
-route.post('/product',upload.single('product'),productController.createProduct);
+// route.use(fileUpload())
+route.post('/product',productController.createProduct);
+route.get('/products',productController.getProducts);
+route.post('/poduct/:id',productController.deleteProduct);
 module.exports=route

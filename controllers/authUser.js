@@ -70,9 +70,15 @@ exports.getUser = async(req,res)=>{
     })
 }
 exports.logout=async(req,res)=>{
-    req.session.destroy();
-    req.clearCookie('username')
-    res.redirect("/");
+    
+    if(req.session){
+        // req.logout();
+        req.session.destroy();
+        res.clearCookie('username');
+        return res.json({success:true})
+    }else{
+        return res.json({success:false})
+    }
 }
 exports.getSession=async(req,res,next)=>{
     console.log(req.session);

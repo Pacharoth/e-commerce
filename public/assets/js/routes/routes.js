@@ -13,7 +13,8 @@ async function routes(){
     if(path =="/admin"){
         if(session){
             document.title = "Admin"
-            rootDOM.innerHTML=Admin.loadUIProduct();
+            rootDOM.innerHTML=AdminUI.AdminPage();
+            AdminUI.loadPage();
         }else{
             history.pushState({},"LoginPage","/login");
             rootDOM.innerHTML = LoginSigup.loadUILoginSignUp();
@@ -25,7 +26,7 @@ async function routes(){
         if(session){
             history.pushState({},"Admin","/admin")
             document.title = "Admin"
-            rootDOM.innerHTML=Admin.loadUIProduct();      
+            rootDOM.innerHTML=AdminUI.AdminPage();      
         }else{
             if(path=="/login"){
                 document.title="LoginPage"

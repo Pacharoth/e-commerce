@@ -6,20 +6,22 @@ const productSchema = new mongoose.Schema({
     },
     detail:{
         type:String,
+        default:"Please input product detail"
     },
-    price:{
-        type:Number,
-        default:null,
+    category:{
+        type:String,
+        default:"Please input category",
     },
     quantity:{
         type:Number,
         default:0,
     },
-    pic:{ data: Buffer, 
-        contentType: String },
+    pic:{
+        type:String,
+    },
     instockAt:{
         type:Date,
-        // required:true
+        required:true
     }
 },{collection:"product"})
 const product= mongoose.model("product",productSchema);

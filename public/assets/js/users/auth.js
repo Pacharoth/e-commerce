@@ -2,7 +2,7 @@
 class LoginSigup{
     static loadUILoginSignUp(){
         return `        <div class="row content">
-        <form action="/login" method="POST" id="Login">
+        <form action="/login" method="POST" id="Login" onsubmit=LoginSigup.handleSignIn(event)>
             <div class="col s12 m6 " >
                 <div class="card z-depth-5 form-field" style="border-radius:10px">
                     <div class="card-action blue lighten-1 white-text center-align">
@@ -37,13 +37,13 @@ class LoginSigup{
                             </p>
                         </div>
                         <div class="input-field">
-                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" type="button" onclick="LoginSigup.handleSignIn(event)" style="width: 100%; border-radius:10px">Login</button>
+                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" style="width: 100%; border-radius:10px">Login</button>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-        <form action="/register" method="POST" id="Register">
+        <form action="/register" method="POST" id="Register" onsubmit=LoginSigup.handleSignUp(event) >
             <div class="col s12 m6">
                 <div class="card z-depth-5 form-field" style="border-radius:10px">
                     <div class="card-action blue lighten-1 white-text center-align">
@@ -90,7 +90,7 @@ class LoginSigup{
                             </p>
                         </div>
                         <div class="input-field">
-                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" type="click" onclick="LoginSigup.handleSignUp(event)" style="width: 100%; border-radius:10px">Sign up</button>
+                            <button class="btn-large  blue lighten-1 waves-effect waves-dark" style="width: 100%; border-radius:10px">Sign up</button>
                         </div>
                     </div>
                 </div>

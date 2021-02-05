@@ -1,7 +1,11 @@
 const user = require('../models/userModel');
 const bcrypt = require('bcrypt');
 exports.getDashboard = async(req,res)=>{
-    res.render('dashboard',{res:req.session.userId});
+    if(req.session.userId){
+        res.render('dashboard')
+    }else{
+        res.render('dashboard')
+    }
 }
 exports.loginUser = async(req,res)=>{
     let request= req.body;
@@ -10,10 +14,12 @@ exports.loginUser = async(req,res)=>{
         if(result){
             bcrypt.compare(request.password,result.password).then(
                 passwordMatch=>{
+                    console.log(passwordMatch)
                     if(passwordMatch){
                         res.cookie('username',result.username,{expire:3600*1000*24});
                         res.cookie('logged-time',new Date().toISOString(),{expire:3600*1000*24});
                         req.session.userId = result._id
+                        console.log(req.session.userId)
                         res.json({password:true,user:true,res:req.session.userId})
                     }else{
                         res.json({password:false,user:true})
@@ -71,7 +77,7 @@ exports.getUser = async(req,res)=>{
 }
 exports.logout=async(req,res)=>{
     
-    if(req.session){
+    if(req.session.userId){
         // req.logout();
         req.session.destroy();
         res.clearCookie('username');
@@ -81,7 +87,8 @@ exports.logout=async(req,res)=>{
     }
 }
 exports.getSession=async(req,res,next)=>{
-    console.log(req.session);
+    console.log(req.session)
+    console.log(req.session.userId);
     if(req.session.userId)res.json({session:req.session.userId})
     else res.json({session:false})
     

@@ -22,7 +22,7 @@ app.use(session({
     store: new RedisStore({client:redisClient}),
     secret:'this is secret',
     cookie:{
-        path:"/",
+        // path:"/",
         httpOnly:true,
         maxAge:1000*60*60*24,//24h expire
         secure:false,

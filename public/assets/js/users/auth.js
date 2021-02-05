@@ -28,14 +28,6 @@ class LoginSigup{
                         </div>
                         <div class="input-field" id="passwordlog">
                         </div>
-                        <div class="input-field ">
-                            <p>
-                                <label>
-                                <input type="checkbox" />
-                                <span>Remember me</span>
-                                </label>
-                            </p>
-                        </div>
                         <div class="input-field">
                             <button class="btn-large  blue lighten-1 waves-effect waves-dark" style="width: 100%; border-radius:10px">Login</button>
                         </div>

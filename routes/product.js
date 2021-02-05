@@ -5,5 +5,6 @@ const productController = require('../controllers/productController')
 // route.use(fileUpload())
 route.post('/product',productController.createProduct);
 route.get('/products',productController.getProducts);
-route.post('/poduct/:id',productController.deleteProduct);
+route.delete('/product/:id',productController.deleteProduct);
+route.put('/product/:id',productController.updateProduct);
 module.exports=route

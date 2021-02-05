@@ -3,7 +3,7 @@ async function routes(){
     let path = window.location.pathname;
     let rootDOM = getElById("root");
     let session;
-    await axios.post('/session').then(result=>{
+    await axios.get('/').then(result=>{
         console.log(result.data);
         session = result.data.session;
     }).catch(err=>{
@@ -26,7 +26,8 @@ async function routes(){
         if(session){
             history.pushState({},"Admin","/admin")
             document.title = "Admin"
-            rootDOM.innerHTML=AdminUI.AdminPage();      
+            rootDOM.innerHTML=AdminUI.AdminPage();
+            AdminUI.loadPage();      
         }else{
             if(path=="/login"){
                 document.title="LoginPage"

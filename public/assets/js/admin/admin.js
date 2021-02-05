@@ -6,8 +6,8 @@ class AdminUI{
             <a href="#!" class="brand-logo white-text text-darken-4" style="font-size:1.5rem; margin-left: 2%;">Awesome shop</a>
             <a href="#" data-target="sidebar" onclick="Admin.navbar()" class="sidenav-trigger" ><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-              <li><a href="sass.html">Home</a></li>
-              <li><a href="badges.html">logout</a></li>
+              <li><a id="home" onlick=AdminUI.>Home</a></li>
+              <li><a id="logout">logout</a></li>
             </ul>
           </div>
         </nav>  
@@ -58,6 +58,8 @@ class AdminUI{
         let path =window.location.pathname
         if(path=="/admin"){
             getElById('loadpage').innerHTML=await Product.productUI();
+            Product.getProducts();
         }
     }
-  }
+    
+}

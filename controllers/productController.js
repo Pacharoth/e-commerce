@@ -67,3 +67,8 @@ exports.updateProduct = async(req,res)=>{
         res.status(500).json()
     })
 }
+exports.getOneProduct = async(req,res)=>{
+    await Product.findById(req.params.id).then(result=>{
+        res.json(result);
+    })
+}

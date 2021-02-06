@@ -3,12 +3,15 @@ async function loadStyeAndScript(){
     var pathnode = "node_modules/";
     const links = [pathnode+"@fortawesome/fontawesome-free/css/all.css", 
                     "assets/css/auth.css",
-                    pathnode+"materialize-css/dist/css/materialize.css",
-                    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"];
+                    "assets/css/dashboard.css",
+                    pathnode+"materialize-css/dist/css/materialize.css"];
     const scripts =[pathnode+"axios/dist/axios.js",
                     "assets/js/users/auth.js",
                     "assets/js/admin/admin.js",
                     "assets/js/products/products.js",
+                    "assets/js/history/history.js",
+                    "assets/js/purchase/purchase.js",
+                    "assets/js/users/user.js",
                     "assets/js/routes/routes.js",
                     ];
     let path=window.location.pathname

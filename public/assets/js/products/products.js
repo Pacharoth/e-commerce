@@ -27,7 +27,7 @@ class Product{
    </div>
    <!-- Modal Structure -->
    <div id="modal1" class="modal">
-   <form action="/product" enctype="multipart/form-data" id="updateForm" method="put" onsubmit=Product.editProduct(event)>
+   <form action="" enctype="multipart/form-data" id="updateForm" onsubmit=Product.editProduct(event)>
    <div class="modal-content">
      <h3>Edit Product Name</h3>
      
@@ -49,7 +49,7 @@ class Product{
          </div>
    </div>
    <div class="modal-footer">
-     <button class="modal-close waves-effect waves-red btn-floating btn-small red lighten-1"><i class="far fa-times-circle"></i></button>
+     <button type="button" class="modal-close waves-effect waves-red btn-floating btn-small red lighten-1"><i class="far fa-times-circle"></i></button>
      <button  class="btn-small btn-floating waves-effect waves-green" id="updateProduct" name="update"><i class="fas fa-check"></i></button>
    </div>
   </form>
@@ -128,7 +128,7 @@ class Product{
     })
     if(dataSubmit.get('productname')==""){
       pname=false
-      console.log(productname)
+      // console.log(productname)
       let product = getElById('Product');
       product.innerHTML=LoginSigup.agreeDOM('Please Input Product Name')
       LoginSigup.clearDOM(product)
@@ -137,7 +137,7 @@ class Product{
     }
     if(img&&pname){
       await axios.post('/product',dataSubmit,{headers: {'content-type': 'multipart/form-data' }}).then(result=>{
-        console.log(result.data)
+        // console.log(result.data)
         this.addProductUI(result.data)
         this.clearForm();
         $('.modal').modal('close')
@@ -160,26 +160,32 @@ class Product{
         $('.modal').modal("close");
         let dom = getElById(id).parentElement.parentElement
         dom.replaceWith(this.updateListProduct(result.data))
-        console.log(result)
+        // console.log(result)
       }).catch(err=>{
         console.log("err")
       })
   }
-  static editProductUI(domId){
+  static async editProductUI(domId){
     $('.modal').modal();
     let dom = getElById(domId).parentElement.parentElement.innerText.split("\t");
-    getElById("product").value=dom[1];
-    getElById("number").value=dom[2];
-    getElById("detail").value=dom[3];
-    getElById("category").value=dom[5];
+    // console.log(dom)
+    await axios.get('/product/'+domId).then(result=>{
+      let res = result.data
+      // console.log(res)
+      getElById("product").value=res.pname;
+      getElById("number").value=res.quantity;
+      getElById("detail").value=res.detail;
+      getElById("category").value=res.category;
+
+    })
     getElById("updateProduct").value=domId
   }
   static async getProducts(){
     await axios.get('/products').then(result=>{
       let res = result.data
-      console.log(res)
+      // console.log(res)
       for (let i = 0; i <res.length; i++) {
-        console.log(res[i])
+        // console.log(res[i])
         this.addProductUI(res[i])
       }
     })

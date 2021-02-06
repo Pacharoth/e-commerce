@@ -18,7 +18,9 @@ exports.loginUser = async(req,res)=>{
                     if(passwordMatch){
                         res.cookie('username',result.username,{expire:3600*1000*24});
                         res.cookie('logged-time',new Date().toISOString(),{expire:3600*1000*24});
-                        req.session.userId = result._id
+                        req.session.userId = result._id;
+                        req.session.username= result.username;
+                        req.session.email = result.email;
                         console.log(req.session.userId)
                         res.json({password:true,user:true,res:req.session.userId})
                     }else{
@@ -89,7 +91,8 @@ exports.logout=async(req,res)=>{
 exports.getSession=async(req,res,next)=>{
     console.log(req.session)
     console.log(req.session.userId);
-    if(req.session.userId)res.json({session:req.session.userId})
+    if(req.session.userId)res.json({session:req.session.userId,
+        username:req.session.username,email:req.session.email})
     else res.json({session:false})
     
 }

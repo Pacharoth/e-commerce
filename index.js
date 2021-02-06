@@ -33,7 +33,8 @@ app.use(cors());
 app.use(fileUpload({
     limits: { fileSize: 50* 1024 * 1024}
   }));
-app.use(express.static(path.join(__dirname,"public")))
+console.log(__dirname)
+app.use(express.static('./public/'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 // app.use(upload.array());

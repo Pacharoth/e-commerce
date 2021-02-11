@@ -1,0 +1,89 @@
+.navigation {
+  padding-left: 2%;
+}
+
+.font-weight {
+  font-weight: bold;
+}
+
+#input-search {
+  width: 50%;
+  margin-bottom: 15%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  #input-search {
+    width: 50%;
+    margin-bottom: 20%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #input-search {
+    width: 50%;
+    margin-bottom: 30%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #input-search {
+    width: 50%;
+    margin-bottom: 30%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #input-search {
+    width: 50%;
+    margin-bottom: 40%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.font-h1 {
+  font-size: 3rem;
+}
+
+@media screen and (max-width: 500px) {
+  .font-h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.font-p {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+  .font-p {
+    font-size: 0.5rem;
+  }
+}
+
+.clothes {
+  background-image: url("../img/3.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.electronic {
+  background-image: url("../img/4.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.carousel {
+  min-height: 80vh;
+}
+/*# sourceMappingURL=shop.css.map */

@@ -9,4 +9,8 @@ route.post('/checkuser',routeUser.getUser);
 route.get('/logout',routeUser.logout);
 route.post('/checkemail',routeUser.getEmail);
 route.post('/session',routeUser.getSession);
+
+route.post('/comment',routeUser.postComment);
+route.get('/comment',routeUser.getComment);
+
 module.exports = route;

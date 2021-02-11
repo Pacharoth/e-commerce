@@ -5,7 +5,8 @@ const { dirname } = require('path');
 exports.createProduct=async(req,res)=>{
     let request = req.body
     let file = req.files.img
-    console.log(file)
+    // console.log(file)
+    console.log(request)
     let dataPath= './public/assets/storage/'
     let savePath='/assets/storage/'+req.session.userId+'/'+file.name
     if(!fs.existsSync(dataPath))fs.mkdirSync(dataPath);

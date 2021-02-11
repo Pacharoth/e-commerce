@@ -24,8 +24,15 @@ async function loadStyeAndScript(){
     for(let index=0;index<links.length;index++){
         let link=  document.createElement("link");
         link.rel="stylesheet";
-        link.href=links[index];
-        document.head.append(link);
+        if(path=="/"){
+            if(index!=2){
+                link.href=links[index];
+                document.head.append(link);
+            }
+        }else{
+            link.href=links[index];
+            document.head.append(link);
+        }
     }
 
 }

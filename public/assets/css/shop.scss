@@ -1,0 +1,70 @@
+// function for screen
+@mixin breakpoint($point){
+    @if $point ==mobile{
+        @media screen and(max-width:500px) {@content;}
+    }
+    @else if $point== ipad{
+        @media screen and (max-width:800px){@content;}
+    }
+    @else if $point==ipadpro{
+        @media screen and (max-width:1024px){@content;}
+    }
+    @else if $point== laptop{
+        @media screen and (max-width:1200px){@content;}
+    }
+    @else if $point == largescreen{
+        @media screen and (max-width:1300px){@content;}
+    }
+}
+@mixin backgroundstyle($url){
+    background-image: url($url);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+@mixin searchInput($marginbottom) {
+    width: 50%; margin-bottom:$marginbottom; margin-left: auto; margin-right: auto;
+}
+.navigation{
+    padding-left: 2%; 
+}
+.font-weight{
+    font-weight: bold;
+}
+#input-search{
+    @include searchInput(15%);
+    @include breakpoint(laptop){
+        @include searchInput(20%)
+    }
+    @include breakpoint(ipad){
+        @include searchInput(30%)
+    }
+    @include breakpoint(ipadpro){
+        @include searchInput(30%)
+    }
+    @include breakpoint(mobile){
+        @include searchInput(40%)
+    }
+}
+.font-h1{
+    font-size: 3rem;
+    @include breakpoint(mobile){
+        font-size: 1.5rem;
+    }
+}
+.font-p{
+    font-size: 1rem;
+    @include breakpoint(mobile){
+        font-size: 0.5rem;
+    }
+}
+.clothes{
+    @include backgroundstyle("../img/3.png")
+}
+.electronic{
+    @include backgroundstyle('../img/4.jpg')
+}
+
+.carousel{
+    min-height: 80vh;
+}

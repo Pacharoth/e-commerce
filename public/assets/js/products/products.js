@@ -32,7 +32,7 @@ class Product{
      <h3>Edit Product Name</h3>
      
          <div class="input-field">
-           <input type="text" id="product" class="blue-text text-lighten-1" name="productname">
+           <input type="text" id="productValue" class="blue-text text-lighten-1" name="productname">
            <label for="productname">Product Name</label>
          </div>
          <div class="input-field">
@@ -43,10 +43,15 @@ class Product{
            <input type="text" id="detail" class="blue-text text-lighten-1" name="description">
            <label for="detail">Description</label>
          </div>
-         <div class="input-field">
-           <input type="text" id="category" class="blue-text text-lighten-1" name="category">
-           <label for="category">Category</label>
-         </div>
+         <div class="input-field ">
+         <label>Category</label>
+         <select onchange="Product.handleChange()" id="selected">
+           <option value="bags">Hand bags</option>
+           <option value="electronic">Electronic</option>
+           <option value="clothes">Clothes</option>
+           <option value="wallets">Wallets</option>
+          </select>
+       </div>
    </div>
    <div class="modal-footer">
      <button type="button" class="modal-close waves-effect waves-red btn-floating btn-small red lighten-1"><i class="far fa-times-circle"></i></button>
@@ -73,10 +78,16 @@ class Product{
            <input type="text" id="description" class="blue-text text-lighten-1" name="description" >
            <label for="description" class="text-blue lighten-1">Description</label>
          </div>
-         <div class="input-field">
-               <input type="text" id="category" class="blue-text text-lighten-1" name="category">
-               <label for="category">Category</label>
-         </div>
+         <div>
+         <label>Category</label>
+         <select onchange="Product.handleChange()" id="select">
+           <option value="bags">Hand bags</option>
+           <option value="electronic">Electronic</option>
+           <option value="clothes">Clothes</option>
+           <option value="wallets">Wallets</option>
+         </select>
+         
+       </div>
          <div class="file-field input-field ">
            <div class="btn blue lighten-1">
              <span>Image</span>
@@ -89,18 +100,24 @@ class Product{
          </div>
          <div class="input-field" id ="image">
          </div>
+         
        </div>
-       
        <div class="modal-footer">
          <button class="modal-close waves-effect waves-red btn-floating btn-small red lighten-1"><i class="far fa-times-circle"></i></button>
          <button class=" btn-small btn-floating waves-effect waves-green"><i class="fas fa-check"></i></button>
        </div>
      </form>
-
-   </div>`
+     
+   </div>
+   
+ `
+  }
+  static handleChange(event){
+    console.log(getElById("select").value)
   }
   static modal(){
       $('.modal').modal();
+      $('select').formSelect();
   }
   static navbar(){
       $('.sidenav').sidenav();
@@ -126,9 +143,11 @@ class Product{
         img = false;
       }
     })
+    
+    
+    dataSubmit.append('category',getElById('select').value)
     if(dataSubmit.get('productname')==""){
       pname=false
-      // console.log(productname)
       let product = getElById('Product');
       product.innerHTML=LoginSigup.agreeDOM('Please Input Product Name')
       LoginSigup.clearDOM(product)
@@ -155,6 +174,7 @@ class Product{
     event.preventDefault()
     let Form = this.formMultipleFile("#updateForm")
     let id = getElById("updateProduct").value
+    Form.append("category",getElById("selected").value)
     await axios.put('/product/'+id,Form).then(
       result=>{
         $('.modal').modal("close");
@@ -167,16 +187,22 @@ class Product{
   }
   static async editProductUI(domId){
     $('.modal').modal();
+    $('select').formSelect();
+    let category=getElById("selected")
     let dom = getElById(domId).parentElement.parentElement.innerText.split("\t");
-    // console.log(dom)
     await axios.get('/product/'+domId).then(result=>{
+      setTimeout(()=>{category.value=res.category},1);
       let res = result.data
-      // console.log(res)
-      getElById("product").value=res.pname;
+      
+      getElById("productValue").value=res.pname;
       getElById("number").value=res.quantity;
       getElById("detail").value=res.detail;
-      getElById("category").value=res.category;
-
+      
+      // let a = new Promise(()=>{
+      //   category.value=res.value;
+      // })
+      // a.then(result=>category.value=res.value)
+      // console.log(res.category)
     })
     getElById("updateProduct").value=domId
   }
@@ -223,3 +249,4 @@ class Product{
     form.reset();
   }
 }
+// $('input.select-dropdown').on('close', function() { console.log($(this).val());});

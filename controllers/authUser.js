@@ -1,4 +1,4 @@
-const user = require('../models/userModel');
+const {user,comment} = require('../models/userModel');
 const bcrypt = require('bcrypt');
 exports.getDashboard = async(req,res)=>{
     if(req.session.userId){
@@ -95,4 +95,23 @@ exports.getSession=async(req,res,next)=>{
         username:req.session.username,email:req.session.email})
     else res.json({session:false})
     
+}
+exports.postComment=async(req,res)=>{
+    console.log(req.body)
+    let newComment = new comment({
+        user:req.session.userId,
+        comment:req.body.comment,
+    })
+    await newComment.save(result=>{
+        res.json(result);
+    })
+}
+exports.getComment = async(req,res)=>{
+    await comment.find().populate('user').exec().then(
+        result=>{
+            res.json(result)
+        }
+    ).catch(err=>{
+        res.json(err);
+    })
 }

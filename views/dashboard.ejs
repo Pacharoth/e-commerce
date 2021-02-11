@@ -3,14 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>AwesomeShop</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/shop.css">
 </head>
 <body>
     <div id="root">
-    </div>   
+        <header>
+            
+  <nav>
+        <div class="nav-wrapper white navigation">
+            <a href="#!" class="brand-logo font-weight black-text">Awesome<span class="green-text text-darken-4">Shop</span></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html" class="black-text"><i class="fas fa-question fa-sm"></i>Help</a></li>
+            <li><a href="badges.html" class="black-text"><i class="fas fa-user-plus fa-sm"></i>Join</a></li>
+            </ul>
+        </div>
+        </nav>
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="sass.html"><i class="fas fa-question"></i>Help</a></li>
+            <li><a href="badges.html"><i class="fas fa-user-plus"></i>Join</a></li>
+            <li><a href=""><i><img src="assets/img/gift-card.png" alt="" width="20" style="vertical-align: middle;"></i><span>Copon Saving</span></a></li>
+            <li><a href=""><i class="fas fa-truck"></i> Free Delivery</a></li>
+            <li><a href=""><i class="fas fa-gift"></i>Gift Voucher</a></li>
+        </ul>
+        </header>
+    </div> 
+    <div class="carousel carousel-slider center">
+        <div class="carousel-fixed-item">
+            <div class="title">
+                <h1 class=" font-weight font-h1">Shop your designer dresser</h1>
+                <p class="flow-text text-grey font-p font-weight grey-text">Ready to wear dresses tailored for you from online. Hurry up while stock lasts.</p>
+            </div>
+           <div class=" input-field center grey-text" id="input-search">
+            <input type="text" id="search">
+            <label for="search"><i class="fas fa-search"></i>Search</label>
+           </div>
+        </div>
+        <div class="carousel-item red white-text clothes" href="#one!">
+        </div>
+        <div class="carousel-item amber white-text electronic" href="#two!">
+        </div>
+    </div>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/materialize-css@1.0.0/dist/js/materialize.min.js"></script>  
     <script src="assets/js/main.js"></script>   
+    <script>
+    $(document).ready(function(){
+    $('.sidenav').sidenav();
+    });
+    $(document).ready(function(){
+    $('.carousel').carousel({
+        fullWidth: true,
+        indicators: true});
+    });
+    setInterval(function(){$('.carousel').carousel('next')},3000)
+    </script>
 </body>
 </html>

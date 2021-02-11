@@ -24,5 +24,28 @@ const productSchema = new mongoose.Schema({
         required:true
     }
 },{collection:"product"})
+const orderSchema = new mongoose.Schema({
+    user:{
+        type:mongoose.Schema.ObjectId,
+        ref:"user",
+    },
+    orderDate:{
+        type:Date,
+        required:true,
+    },
+    status:{
+        type:String,
+        default:"In progress",
+    },
+    requiredDate:{
+        type:Date,
+        default:null,
+    },
+    shippedDate:{
+        type:Date,
+        default:null,
+    },
+});
+const order = mongoose.model("order",orderSchema);
 const product= mongoose.model("product",productSchema);
-module.exports = product
+module.exports = {product,order}

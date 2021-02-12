@@ -1,4 +1,4 @@
-const Product = require('../models/productModel')
+const {Product,order} = require('../models/productModel')
 const path = require('path');
 const fs = require('fs');
 const { dirname } = require('path');
@@ -21,7 +21,7 @@ exports.createProduct=async(req,res)=>{
             category:request.category,
             quantity:request.quantity,
             pic:savePath,
-            instockAt:new Date()
+            instockAt:req.body.date,
         })
         product.save().then(result=>{
             console.log(result)
@@ -57,7 +57,7 @@ exports.updateProduct = async(req,res)=>{
         result.quantity = request.quantity;
         result.detail=request.description;
         result.category = request.category;
-        result.instockAt = new Date()
+        result.instockAt = request.date
         result.save().then(resultUpdate=>{
             res.status(200).json(resultUpdate)
         }).catch(err=>{

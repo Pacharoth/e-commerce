@@ -4,10 +4,12 @@ async function loadStyeAndScript(){
     const links = [pathnode+"@fortawesome/fontawesome-free/css/all.css", 
                     "assets/css/auth.css",
                     "assets/css/dashboard.css",
+                    "assets/css/shop.css",
                     pathnode+"materialize-css/dist/css/materialize.css"];
     const scripts =[pathnode+"axios/dist/axios.js",
                     "assets/js/users/auth.js",
                     "assets/js/admin/admin.js",
+                    "assets/js/dashboard/dashboard.js",
                     "assets/js/products/products.js",
                     "assets/js/history/history.js",
                     "assets/js/purchase/purchase.js",

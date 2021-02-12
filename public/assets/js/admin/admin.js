@@ -6,7 +6,7 @@ class AdminUI{
             <a href="#!" class="brand-logo white-text text-darken-4" style="font-size:1.5rem; margin-left: 2%;">Awesome shop</a>
             <a href="#" data-target="sidebar" onclick="Product.navbar()" class="sidenav-trigger" ><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-              <li><a id="home">Home</a></li>
+              <li><a  onclick =AdminUI.goHomepage()>Home</a></li>
               <li><a onclick="AdminUI.logoutPage()">logout</a></li>
             </ul>
           </div>
@@ -60,7 +60,7 @@ class AdminUI{
         <li>
           <a id="history" onclick="AdminUI.handleHistory()" class="waves-effect waves-teal"><i class="fas fa-history fa-lg"></i>History</a>
         </li>
-        <li><a href="sass.html"><i class="fas fa-home fa-lg"></i>Home</a></li>
+        <li><a onclick =AdminUI.goHomepage() ><i class="fas fa-home fa-lg"></i>Home</a></li>
         <li><a onclick=AdminUI.logoutPage()><i class="fas fa-sign-out-alt fa-lg"></i>Logout</a></li>
       </ul>
         <main id="loadpage">
@@ -108,6 +108,9 @@ class AdminUI{
       selector(button).className="waves-effect waves-teal white-text blue lighten-1";
       selector(icon).style.color = "white";
       
+    }
+    static async goHomepage(){
+
     }
     static async loadPage(){
         let path =window.location.pathname

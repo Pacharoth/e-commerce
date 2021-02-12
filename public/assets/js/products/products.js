@@ -43,6 +43,10 @@ class Product{
            <input type="text" id="detail" class="blue-text text-lighten-1" name="description">
            <label for="detail">Description</label>
          </div>
+         <div class="input-field">
+         <input type="date" class="" name="date">
+         <label for="date">Date</label>
+         </div>
          <div class="input-field ">
          <label>Category</label>
          <select onchange="Product.handleChange()" id="selected">
@@ -88,6 +92,10 @@ class Product{
          </select>
          
        </div>
+       <div class="input-field">
+       <input type="date" id="date" class="" name="date">
+       <label for="date">Date</label>
+       </div>
          <div class="file-field input-field ">
            <div class="btn blue lighten-1">
              <span>Image</span>
@@ -118,6 +126,9 @@ class Product{
   static modal(){
       $('.modal').modal();
       $('select').formSelect();
+      
+       
+      
   }
   static navbar(){
       $('.sidenav').sidenav();
@@ -225,12 +236,13 @@ class Product{
     
   }
   static listProduct(product){
+    
     return `
     <td><img class="materialboxed" src="${product.pic}" width=60></td>
     <td>${product.pname}</td>
     <td>${product.quantity}</td>
     <td>${product.detail}</td>
-    <td>${product.instockAt}</td>
+    <td>${new Date(product.instockAt).toDateString()}</td>
     <td>${product.category}</td>
     <td>
       <button data-target="modal1" onclick="Product.editProductUI(this.id)" class="btn-floating btn-small waves-effect waves-light modal-trigger" id="${product._id}"><i class="fas fa-edit"></i></button>
@@ -249,4 +261,28 @@ class Product{
     form.reset();
   }
 }
-// $('input.select-dropdown').on('close', function() { console.log($(this).val());});
+class ProductHomepage{
+  static loadProductUIList(){
+    return `                <div class="row">
+          <div class="card-product">
+          <div class="card">
+              <div class="card-content">
+                  
+              <span class="card-title activator grey-text text-darken-4">Name<i class="material-icons right">more_vert</i></span>
+              <div class="card-img waves-effect waves-block waves-light">
+                  <img src="assets/img/1.jpeg" class="img1" alt="">
+                  
+              </div>
+              <h4 class="center">15$</h4>
+              <a href="" class=" btn-small waves-effect waves-light grey" style="width: 100%;"><i class="fas fa-shopping-cart"></i> Add to cart</a>
+
+              </div>
+              <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Name<i class="material-icons right">close</i></span>
+              <p>Description</p>
+              </div>
+          </div>     
+      </div>
+    </div>`
+  }
+}

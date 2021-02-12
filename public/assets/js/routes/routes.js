@@ -27,6 +27,7 @@ async function routes(){
     }
     else if(path=="/"){
         document.title="AwesomeShop"
+        // Dashboard.loadDashboard();
         
     }else if(path == "/login" || path == "/signup"){
         if(session.session){

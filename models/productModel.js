@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
     },
     instockAt:{
         type:Date,
-        required:true
+        required:true,
     }
 },{collection:"product"})
 const orderSchema = new mongoose.Schema({
@@ -46,6 +46,6 @@ const orderSchema = new mongoose.Schema({
         default:null,
     },
 });
-const order = mongoose.model("order",orderSchema);
-const product= mongoose.model("product",productSchema);
-module.exports = {product,order}
+const Order = mongoose.model("order",orderSchema);
+const Product= mongoose.model("product",productSchema);
+module.exports = {Product,Order}

@@ -19,19 +19,26 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type:String,
-        default:"user",
     },
-    comment:{
+    comment:[{
         type:mongoose.Schema.ObjectId,
         ref:"comment",
-    }
+    }]
 },{collection:"user"})
 const commentSchema = new mongoose.Schema({
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'user'
+    },
     comment:{
         type:String,
     },
     DateComment:{
         type:Date,
+    },
+    product:{
+        type:mongoose.Schema.ObjectId,
+        ref:'product',
     }
 },{collection:"comment"})
 const user = mongoose.model("user",userSchema);

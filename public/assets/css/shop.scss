@@ -1,10 +1,15 @@
 // function for screen
+@import '../../node_modules/materialize-css/sass/materialize';
 @mixin breakpoint($point){
     @if $point ==mobile{
-        @media screen and(max-width:500px) {@content;}
+        @media screen and(max-width:600px) {@content;}
     }
     @else if $point== ipad{
         @media screen and (max-width:800px){@content;}
+    }
+    @else if $point==laptop1{
+        @media screen and (max-width:992px){@content;}
+
     }
     @else if $point==ipadpro{
         @media screen and (max-width:1024px){@content;}
@@ -16,6 +21,11 @@
         @media screen and (max-width:1300px){@content;}
     }
 }
+:root{
+    --logo-color: rgb(20, 196, 20); 
+    --shadow-color: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    --background-web:rgb(240, 242, 245);
+}
 @mixin backgroundstyle($url){
     background-image: url($url);
     background-repeat: no-repeat;
@@ -25,6 +35,10 @@
 @mixin searchInput($marginbottom) {
     width: 50%; margin-bottom:$marginbottom; margin-left: auto; margin-right: auto;
 }
+main{
+    background-color: rgba(240, 242, 245, 0.87);
+}
+//background image and slider
 .navigation{
     padding-left: 2%; 
 }
@@ -32,24 +46,18 @@
     font-weight: bold;
 }
 #input-search{
-    @include searchInput(15%);
-    @include breakpoint(laptop){
-        @include searchInput(20%)
-    }
-    @include breakpoint(ipad){
-        @include searchInput(30%)
-    }
-    @include breakpoint(ipadpro){
-        @include searchInput(30%)
-    }
-    @include breakpoint(mobile){
-        @include searchInput(40%)
-    }
+    @include searchInput(10%);
+}
+.d-flex{
+    display: flex;
 }
 .font-h1{
     font-size: 3rem;
     @include breakpoint(mobile){
         font-size: 1.5rem;
+    }
+    @include breakpoint(ipad){
+        font-size: 2rem;
     }
 }
 .font-p{
@@ -66,5 +74,129 @@
 }
 
 .carousel{
-    min-height: 80vh;
+    min-height: 70vh;
+}
+// gift card free delivery and coupon 
+.card-content-custom{
+    box-shadow: var(--shadow-color);
+    // padding: 3% 2% 3% 2%;
+    flex-wrap: wrap;
+    justify-content: center;
+    @include breakpoint(laptop1){
+        display: none;
+    }
+}
+.card-body-custom{
+    margin: 1%;
+    align-items: center;
+    padding: 10px 10px 15px 10px;
+    box-shadow: var(--shadow-color);
+    justify-content: flex-end;
+    width: 30%;
+}
+.card-text-custom{
+    margin-right: auto;
+}
+.title-card{
+    color: white;
+    padding-bottom:10px ;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+.description-card{
+    color: white;
+    // padding-bottom: 10px;
+    font-size: 15px;
+    margin-bottom: 30%;
+}
+
+.card-text-custom a{
+    background-color: white;
+    padding: 12px 10px 12px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    box-shadow: var(--shadow-color);
+    transition: all 0.3s ease 0.3s;
+    &:hover{
+        background-color: gray;
+        color: white;
+    }
+}
+.delivery-img{
+    width:100px;
+}
+// in main part
+.sidebar{
+    box-shadow: var(--shadow-color);
+    padding-top: 2%;
+    width: 20%;
+    background-color: white;
+    ul{
+        width: 100%;
+        
+        a{  
+            justify-content: space-between;
+            width: 100%;
+            padding: 2%;
+            h5{
+                font-size: 1.20em;
+                @extend .font-weight;
+                color:grey;
+            }
+            img{
+                width:40px;
+                vertical-align: middle;
+                margin-left: 20%;
+            }  
+        
+        }  
+    }
+    @include breakpoint(laptop1){
+        display: none;
+    }
+}
+.content-product{
+    width: 80%;
+    @include breakpoint(laptop1){
+        width: 100%;
+    }
+}
+
+.card-product{
+    @extend .col ,.s12 ,.m4,.l4;
+}
+.card-custom{
+    @extend .card;
+}
+.card-img{
+    @extend .card-image;
+}
+.addcart{
+    float: right;
+}
+.img{
+    height: 10vh;
+    padding: 2%;
+    border-radius: 10px;
+    @include breakpoint(mobile){
+        height: auto;
+    }
+}
+.title{
+    color: white;
+}
+.big-img{
+    height: 50vh;
+}
+.content-img-chart{
+    padding: 10px;
+    justify-content: space-around;
+}
+.position-img{
+    @extend .halfway-fab;
+    right: none;
+    top: -1%;
+    right: 10px;
 }

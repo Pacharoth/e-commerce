@@ -98,16 +98,21 @@ exports.getSession=async(req,res,next)=>{
 }
 exports.postComment=async(req,res)=>{
     console.log(req.body)
-    let newComment = new comment({
+    const newcomment = new comment({
         user:req.session.userId,
         comment:req.body.comment,
+        DateComment:new Date,
+        product:req.body.productId,
+    });
+    await newcomment.save().then(result=>{
+        res.json(result)
+    }).catch(err=>{
+        res.json(result)
     })
-    await newComment.save(result=>{
-        res.json(result);
-    })
+
 }
 exports.getComment = async(req,res)=>{
-    await comment.find().populate('user').exec().then(
+    await comment.find().populate('user','username').exec().then(
         result=>{
             res.json(result)
         }

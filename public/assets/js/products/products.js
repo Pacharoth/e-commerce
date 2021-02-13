@@ -1,3 +1,4 @@
+
 class Product{
   static async productUI(){
     return ` <div class="card-panel">
@@ -294,9 +295,6 @@ class ProductHomepage{
       </div>
     </div>`
   }
-  static async handleCart(id){
-    
-  }
   static putProductInDom(product){
     return ` 
       
@@ -308,7 +306,7 @@ class ProductHomepage{
               
           </div>
           <h4 class="center">${product.price}$</h4>
-          <a id="${product._id}" onclick="ProductHomepage.handleCart(this.id)" class=" btn-small waves-effect waves-light grey" style="width: 100%;"><i class="fas fa-shopping-cart"></i> Add to cart</a>
+          <a id="${product._id}" onclick="Dashboard.handleCart(this.id)" class=" btn-small waves-effect waves-light grey" style="width: 100%;"><i class="fas fa-shopping-cart"></i> Add to cart</a>
 
           </div>
           <div class="card-reveal">

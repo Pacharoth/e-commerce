@@ -183,6 +183,9 @@ main{
     @include breakpoint(mobile){
         height: auto;
     }
+    @include breakpoint(laptop){
+        height: auto;
+    }
 }
 .title{
     color: white;

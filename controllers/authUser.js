@@ -102,21 +102,30 @@ exports.postComment=async(req,res)=>{
         user:req.session.userId,
         comment:req.body.comment,
         DateComment:new Date,
-        product:req.body.productId,
+        product:req.body.pid,
     });
-    await newcomment.save().then(result=>{
-        res.json(result)
+    await newcomment.save().then(async(result)=>{
+        await comment.findById(result._id).populate('user').exec()
+        .then(resultone=>{
+            console.log(resultone)
+            res.json(resultone)
+        }).catch(err=>{
+            console.log(err);
+            res.json({result:false})
+        })
     }).catch(err=>{
+        console.log(err);
         res.json(result)
     })
 
 }
 exports.getComment = async(req,res)=>{
-    await comment.find().populate('user','username').exec().then(
+    console.log(req.params.id)
+    await comment.find({product:req.params.id}).populate('user').populate('product').exec().then(
         result=>{
             res.json(result)
         }
     ).catch(err=>{
-        res.json(err);
+        res.json({result:false});
     })
 }

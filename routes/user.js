@@ -2,7 +2,7 @@ const express = require('express');
 const route = express.Router();
 const routeUser = require('../controllers/authUser')
 
-route.get(['/admin','/login','/signup','/','/productdetail/:id'],routeUser.getDashboard);
+route.get(['/admin','/login','/signup','/','/productdetail*'],routeUser.getDashboard);
 route.post('/register',routeUser.registerUser);
 route.post('/login',routeUser.loginUser);
 route.post('/checkuser',routeUser.getUser);
@@ -11,6 +11,6 @@ route.post('/checkemail',routeUser.getEmail);
 route.post('/session',routeUser.getSession);
 
 route.post('/comment',routeUser.postComment);
-route.get('/comment',routeUser.getComment);
+route.get('/comment/:id',routeUser.getComment);
 
 module.exports = route;

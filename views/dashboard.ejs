@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="root">
-        <header>
+        <!-- <header>
             <nav>
                 <div class="nav-wrapper white navigation">
                     <a href="#!" class="brand-logo font-weight black-text">Awesome<span class="green-text text-darken-4">Shop</span></a>
@@ -156,10 +156,10 @@
                         <h3>Comment</h3>
                         <div class="card">
                             <div class="card-content row valign-wrapper">
-                                <div class="col s2 m1">
+                                <div class="col s2 m2 lg2">
                                     <img src="https://materializecss.com/images/yuna.jpg" class="circle avatar-custom"  alt="">
                                 </div>
-                                <div class="col s10 m11">
+                                <div class="col s10 m10 lg10">
                                     <span class="card-title" style="font-weight: bold;">Name</span>
                                     <p>Date</p>
                                 </div>
@@ -186,12 +186,14 @@
                     </div>
                 </div>
             </div>
-        </main> 
+        </main>  -->
     </div>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/materialize-css@1.0.0/dist/js/materialize.min.js"></script>  
-    <script src="assets/js/main.js"></script>   
+    <script src="assets/js/main.js" id="mainsource"></script>   
     <script>
+       let p= document.getElementById("mainsource")
+        p.src = window.location.origin+"/"+"assets/js/main.js"
     $(document).ready(function(){
     $('.sidenav').sidenav();
     $('select').formSelect();

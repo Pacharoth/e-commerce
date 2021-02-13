@@ -3,6 +3,7 @@ async function routes(){
     let path = window.location.pathname;
     let rootDOM = getElById("root");
     let session;
+    let reg = /\/productdetail*/g
     await axios.post('/session').then(result=>{
         // console.log(result.data);
         session = result.data;
@@ -27,7 +28,15 @@ async function routes(){
     }
     else if(path=="/"){
         document.title="AwesomeShop"
-        // Dashboard.loadAllProduct();        
+        Dashboard.loadAllProduct();        
+    }
+    else if(reg.test(path)){
+        let search = new URLSearchParams(window.location.search)
+        let id=search.get("pid")
+        console.log(search.get("pid"))
+        document.title="ProductDetail";
+        Dashboard.loadProductDetail(id);
+        
     }
     else if(path == "/login" || path == "/signup"){
         if(session.session){

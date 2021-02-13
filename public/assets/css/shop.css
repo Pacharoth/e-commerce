@@ -9224,6 +9224,12 @@ main {
   }
 }
 
+@media screen and (max-width: 1200px) {
+  .img {
+    height: auto;
+  }
+}
+
 .title {
   color: white;
 }

@@ -3,7 +3,7 @@ class Dashboard{
         return `        <header>
         <nav>
             <div class="nav-wrapper white navigation">
-                <a href="#!" class="brand-logo font-weight black-text">Awesome<span class="green-text text-darken-4">Shop</span></a>
+                <a onclick="Dashboard.goHomepage()" class="brand-logo font-weight black-text">Awesome<span class="green-text text-darken-4">Shop</span></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                 <li><a href="sass.html" class="black-text"><i class="fas fa-question fa-sm"></i>Help</a></li>
@@ -86,6 +86,12 @@ class Dashboard{
     
     </main> `
     }
+    static goHomepage(){
+        document.title="AwesomeShop";
+        history.pushState({},"AwesomeShop","/");
+        getElById("row").innerHTML="";
+        ProductHomepage.loadProductData();
+    }
     static goToPageLogin(){
         document.title = "LoginPage";
         history.pushState({},"LoginPage","/login");
@@ -95,14 +101,21 @@ class Dashboard{
         let rootelement = document.getElementById('root')
         rootelement.innerHTML=this.dashboardUI();
     }
-    static loadOneProduct(){
+    static async loadProductDetail(id){
         this.loadDashboardToRoot();
-        
         this.loadCourselAndSidebar();
+        getElById("row").innerHTML=this.contentProductDetail();
+        ProductDetail.loadProductData(id)
     }
+    static async handleCart(id){
+        document.title="ProductDetail"
+        history.pushState({},"ProductDetail","/productdetail?pid="+id);
+        getElById("row").innerHTML="";
+        getElById("row").innerHTML=this.contentProductDetail();
+        ProductDetail.loadProductData(id);
+      }
     static loadAllProduct(){
         this.loadDashboardToRoot();
-        // getElById("row").innerHTML=this.contentProduct();
         this.loadCourselAndSidebar();
         ProductHomepage.loadProductData();
     }
@@ -110,7 +123,7 @@ class Dashboard{
         return `<div class="card-product"></div>`
     }
     static contentProductDetail(){
-        return `<div class="col s12 m12 l12"></div>`
+        return `<div class="col s12 m12 l12" id="productdetail"></div>`
     }
     static loadCourselAndSidebar(){
         $(document).ready(function(){
@@ -121,6 +134,6 @@ class Dashboard{
                 fullWidth: true,
                 indicators: true});
             });
-        setInterval(function(){$('.carousel').carousel('next')},3000)
+        setTimeout(function(){$('.carousel').carousel('next')},3000)
     }
 }

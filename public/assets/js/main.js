@@ -1,21 +1,23 @@
 
 async function loadStyeAndScript(){
     var pathnode = "node_modules/";
-    const links = [pathnode+"@fortawesome/fontawesome-free/css/all.css", 
-                    "assets/css/auth.css",
-                    "assets/css/dashboard.css",
-                    "assets/css/shop.css",
+    var location = window.location.origin+"/";
+    console.log(location)
+    const links = [location+pathnode+"@fortawesome/fontawesome-free/css/all.css", 
+                    location+"assets/css/auth.css",
+                    location+"assets/css/dashboard.css",
+                    location+"assets/css/shop.css",
                     pathnode+"materialize-css/dist/css/materialize.css"];
-    const scripts =[pathnode+"axios/dist/axios.js",
-                    "assets/js/users/auth.js",
-                    "assets/js/admin/admin.js",
-                    "assets/js/dashboard/dashboard.js",
-                    "assets/js/products/products.js",
-                    "assets/js/history/history.js",
-                    "assets/js/purchase/purchase.js",
-                    "assets/js/products/productDetail.js",
-                    "assets/js/users/user.js",
-                    "assets/js/routes/routes.js",
+    const scripts =[location+pathnode+"axios/dist/axios.js",
+                    location+"assets/js/users/auth.js",
+                    location+"assets/js/admin/admin.js",
+                    location+"assets/js/dashboard/dashboard.js",
+                    location+"assets/js/products/products.js",
+                    location+"assets/js/history/history.js",
+                    location+"assets/js/purchase/purchase.js",
+                    location+"assets/js/products/productDetail.js",
+                    location+"assets/js/users/user.js",
+                    location+"assets/js/routes/routes.js",
                     ];
     let path=window.location.pathname
     for (let index=0;index<scripts.length;index++){

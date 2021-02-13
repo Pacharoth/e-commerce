@@ -22,6 +22,10 @@ const productSchema = new mongoose.Schema({
     instockAt:{
         type:Date,
         required:true,
+    },
+    price:{
+        type:Number,
+        default:0,
     }
 },{collection:"product"})
 const orderSchema = new mongoose.Schema({

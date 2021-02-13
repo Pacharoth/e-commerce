@@ -1,14 +1,14 @@
 body,html {
-    overflow: hidden;
+    /* overflow: hidden; */
     height: 100%;
  }
-header,main,footer{
+.header,.main,.footer{
     padding-left: 300px;
 }
 
 /* .modal { width: 60% !important ; height:auto; overflow:hidden;} */
 @media only screen and (max-width : 992px) {
-    header,main,footer{
+    .header,.main,.footer{
 		padding-left: 0;
 	}
 }

@@ -165,7 +165,7 @@ main{
 }
 
 .card-product{
-    @extend .col ,.s12 ,.m4,.l4;
+    @extend .col ,.m4;
 }
 .card-custom{
     @extend .card;
@@ -199,4 +199,14 @@ main{
     right: none;
     top: -1%;
     right: 10px;
+}
+.avatar-custom{
+    height: 10vh;
+    max-width: 100%;
+    @include breakpoint(mobile){
+        height: auto;
+    }
+    @include breakpoint(ipadpro){
+        height: auto;
+    }
 }

@@ -27,13 +27,14 @@ async function routes(){
     }
     else if(path=="/"){
         document.title="AwesomeShop"
-        // Dashboard.loadDashboard();
-        
-    }else if(path == "/login" || path == "/signup"){
+        // Dashboard.loadAllProduct();        
+    }
+    else if(path == "/login" || path == "/signup"){
         if(session.session){
             history.pushState({},"Admin","/admin")
             document.title = "Admin"
             rootDOM.innerHTML=AdminUI.AdminPage();
+            AdminUI.changeUsernameEmail(session.username,session.email)
             AdminUI.loadPage();      
         }else{
             if(path=="/login"){
@@ -44,7 +45,6 @@ async function routes(){
             rootDOM.innerHTML = LoginSigup.loadUILoginSignUp();
         }
     }
-    
 }
 routes();
 window.onpopstate = routes; // keep track on url and fix about refresh page and other stuff.

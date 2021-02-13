@@ -3557,7 +3557,7 @@ table span.badge {
   right: auto;
 }
 
-.row .col.s12, .row .card-product {
+.row .col.s12, .row .s12.card-product {
   width: 100%;
   margin-left: auto;
   left: auto;
@@ -3910,7 +3910,7 @@ table span.badge {
     left: auto;
     right: auto;
   }
-  .row .col.l4, .row .card-product {
+  .row .col.l4, .row .l4.card-product {
     width: 33.33333%;
     margin-left: auto;
     left: auto;
@@ -9242,5 +9242,22 @@ main {
   right: none;
   top: -1%;
   right: 10px;
+}
+
+.avatar-custom {
+  height: 10vh;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .avatar-custom {
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .avatar-custom {
+    height: auto;
+  }
 }
 /*# sourceMappingURL=shop.css.map */

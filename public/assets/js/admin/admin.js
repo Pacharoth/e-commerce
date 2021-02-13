@@ -1,6 +1,6 @@
 class AdminUI{
     static AdminPage(){
-        return `      <header>
+        return `      <header class="header">
         <nav>
           <div class="nav-wrapper blue lighten-1">
             <a href="#!" class="brand-logo white-text text-darken-4" style="font-size:1.5rem; margin-left: 2%;">Awesome shop</a>
@@ -63,7 +63,7 @@ class AdminUI{
         <li><a onclick =AdminUI.goHomepage() ><i class="fas fa-home fa-lg"></i>Home</a></li>
         <li><a onclick=AdminUI.logoutPage()><i class="fas fa-sign-out-alt fa-lg"></i>Logout</a></li>
       </ul>
-        <main id="loadpage">
+        <main id="loadpage" class="main">
         </main> `
     
     }
@@ -110,7 +110,9 @@ class AdminUI{
       
     }
     static async goHomepage(){
-
+      document.title="AwesomeShop"
+      history.pushState({},"Awesome","/");
+      routes();
     }
     static async loadPage(){
         let path =window.location.pathname

@@ -7,7 +7,7 @@ class Dashboard{
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                 <li><a href="sass.html" class="black-text"><i class="fas fa-question fa-sm"></i>Help</a></li>
-                <li><a href="badges.html" class="black-text"><i class="fas fa-user-plus fa-sm"></i>Join</a></li>
+                <li><a onclick="Dashboard.goToPageLogin()" class="black-text"><i class="fas fa-user-plus fa-sm" ></i>Join</a></li>
                 </ul>
             </div>
         </nav>
@@ -27,7 +27,7 @@ class Dashboard{
     <div class="carousel carousel-slider center">
         <div class="carousel-fixed-item">
             <div class="title">
-                <h1 class=" font-weight font-h1">Shop your designer dresser</h1>
+                <h1 class=" font-weight font-h1 black-text">Shop your designer dresser</h1>
                 <p class="flow-text text-grey font-p font-weight grey-text">Ready to wear dresses tailored for you from online. Hurry up while stock lasts.</p>
             </div>
         <form action="">
@@ -79,18 +79,38 @@ class Dashboard{
             </ul>
         </div>
         <div class="content-product">
-                
+            <div class="row" id="row">
+
+            </div>
         </div>
     
     </main> `
     }
-    static loadDashboard(){
+    static goToPageLogin(){
+        document.title = "LoginPage";
+        history.pushState({},"LoginPage","/login");
+        routes();
+    }
+    static loadDashboardToRoot(){
         let rootelement = document.getElementById('root')
-        let path = window.location.pathname
-        if(path=="/"){
-            rootelement.innerHTML=this.dashboardUI();
-            this.loadCourselAndSidebar();
-        }
+        rootelement.innerHTML=this.dashboardUI();
+    }
+    static loadOneProduct(){
+        this.loadDashboardToRoot();
+        
+        this.loadCourselAndSidebar();
+    }
+    static loadAllProduct(){
+        this.loadDashboardToRoot();
+        // getElById("row").innerHTML=this.contentProduct();
+        this.loadCourselAndSidebar();
+        ProductHomepage.loadProductData();
+    }
+    static contentProduct(){
+        return `<div class="card-product"></div>`
+    }
+    static contentProductDetail(){
+        return `<div class="col s12 m12 l12"></div>`
     }
     static loadCourselAndSidebar(){
         $(document).ready(function(){

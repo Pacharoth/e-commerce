@@ -16,6 +16,7 @@ class Product{
                <th>Detail</th>
                <th>In Stock At</th>
                <th>Category</th>
+               <th>Product's Price</th>
                <th>Action</th>
            </tr>
          </thead>
@@ -44,8 +45,12 @@ class Product{
            <label for="detail">Description</label>
          </div>
          <div class="input-field">
-         <input type="date" class="" name="date">
+         <input type="date" id="date" class="" name="date">
          <label for="date">Date</label>
+         </div>
+         <div class="input=field">
+         <input type="number" step="any" id="price" name="price">
+         <label for="price">Price</label>
          </div>
          <div class="input-field ">
          <label>Category</label>
@@ -83,6 +88,11 @@ class Product{
            <label for="description" class="text-blue lighten-1">Description</label>
          </div>
          <div>
+         <div class="input-field">
+         <input type="number" id="price" step="any" class="blue-text text-lighten-1" name="price">
+         <label for="price">Price</label>
+         </div>
+         <div class="input=field">
          <label>Category</label>
          <select onchange="Product.handleChange()" id="select">
            <option value="bags">Hand bags</option>
@@ -204,16 +214,14 @@ class Product{
     await axios.get('/product/'+domId).then(result=>{
       setTimeout(()=>{category.value=res.category},1);
       let res = result.data
-      
+      let date = new Date(res.instockAt)
+      var day = ("0" + date.getDate()).slice(-2);
+      var month = ("0" + (date.getMonth()+1)).slice(-2);
+      getElById("price").value =res.price;
+      getElById("date").value = date.getFullYear()+"-"+(month)+"-"+(day);
       getElById("productValue").value=res.pname;
       getElById("number").value=res.quantity;
       getElById("detail").value=res.detail;
-      
-      // let a = new Promise(()=>{
-      //   category.value=res.value;
-      // })
-      // a.then(result=>category.value=res.value)
-      // console.log(res.category)
     })
     getElById("updateProduct").value=domId
   }
@@ -244,6 +252,7 @@ class Product{
     <td>${product.detail}</td>
     <td>${new Date(product.instockAt).toDateString()}</td>
     <td>${product.category}</td>
+    <td>${product.price}$</td>
     <td>
       <button data-target="modal1" onclick="Product.editProductUI(this.id)" class="btn-floating btn-small waves-effect waves-light modal-trigger" id="${product._id}"><i class="fas fa-edit"></i></button>
       <button class="btn-floating btn-small waves-effect waves-light  modal-trigger red lighten-2" onclick=Product.removeProduct(this.id) id="${product._id}"><i class="fas fa-minus"></i></button>
@@ -284,5 +293,47 @@ class ProductHomepage{
           </div>     
       </div>
     </div>`
+  }
+  static async handleCart(id){
+    
+  }
+  static putProductInDom(product){
+    return ` 
+      
+          <div class="card-content">
+              
+          <span class="card-title activator grey-text text-darken-4">${product.pname}<i class="material-icons right">more_vert</i></span>
+          <div class="card-img waves-effect waves-block waves-light">
+              <img class="responsive-img " src="${product.pic}" class="img1" alt="">
+              
+          </div>
+          <h4 class="center">${product.price}$</h4>
+          <a id="${product._id}" onclick="ProductHomepage.handleCart(this.id)" class=" btn-small waves-effect waves-light grey" style="width: 100%;"><i class="fas fa-shopping-cart"></i> Add to cart</a>
+
+          </div>
+          <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">${product.pname}<i class="material-icons right">close</i></span>
+          <p>${product.detail}</p>
+          </div>
+         
+    `
+  }
+
+  static listAllProduct(product){
+    let productContent = document.createElement("div");
+    productContent.className="card-product";
+    let card = document.createElement("div");
+    card.className="card";
+    card.innerHTML = this.putProductInDom(product)
+    productContent.appendChild(card);
+    getElById("row").appendChild(productContent);
+  }
+  static async loadProductData(){
+    await axios.get('/products').then(result=>{
+      let res = result.data
+      for (let i = 0; i <res.length; i++) {
+        this.listAllProduct(res[i]);
+      }
+    })
   }
 }

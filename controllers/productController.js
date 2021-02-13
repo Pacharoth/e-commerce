@@ -21,7 +21,8 @@ exports.createProduct=async(req,res)=>{
             category:request.category,
             quantity:request.quantity,
             pic:savePath,
-            instockAt:req.body.date,
+            instockAt:request.date,
+            price:request.price,
         })
         product.save().then(result=>{
             console.log(result)
@@ -57,7 +58,8 @@ exports.updateProduct = async(req,res)=>{
         result.quantity = request.quantity;
         result.detail=request.description;
         result.category = request.category;
-        result.instockAt = request.date
+        result.instockAt = request.date;
+        result.price = request.price;
         result.save().then(resultUpdate=>{
             res.status(200).json(resultUpdate)
         }).catch(err=>{

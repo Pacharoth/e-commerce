@@ -13,6 +13,7 @@ async function loadStyeAndScript(){
                     "assets/js/products/products.js",
                     "assets/js/history/history.js",
                     "assets/js/purchase/purchase.js",
+                    "assets/js/products/productDetail.js",
                     "assets/js/users/user.js",
                     "assets/js/routes/routes.js",
                     ];
@@ -26,15 +27,9 @@ async function loadStyeAndScript(){
     for(let index=0;index<links.length;index++){
         let link=  document.createElement("link");
         link.rel="stylesheet";
-        if(path=="/"){
-            if(index!=2){
-                link.href=links[index];
-                document.head.append(link);
-            }
-        }else{
-            link.href=links[index];
-            document.head.append(link);
-        }
+        link.href=links[index];
+        document.head.append(link);
+        
     }
 
 }
@@ -48,7 +43,6 @@ function getElById(domId){
 function serializer(domId){
     let form = selector(domId);
     let Form = new FormData(form);
-    // console.log(Form);
     let dataSubmit={}
     for (const pair of Form) {
         dataSubmit[pair[0]]=pair[1];

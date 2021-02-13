@@ -17,7 +17,7 @@ class LoginSigup{
                         <div class="input-field" id="resultlog">
                         </div>
                         <div class="input-field">
-                            <input type="text" id="email" name="email" >
+                            <input type="email" id="email" name="email" >
                             <label for="email">Email Address</label>
                         </div>
                         <div class="input-field" id="emaillog">
@@ -53,7 +53,7 @@ class LoginSigup{
                         <div class="input-field" id="uusername">
                         </div>
                         <div class="input-field">
-                            <input type="text" required id="emailre" name="email" >
+                            <input type="email" required id="emailre" name="email" >
                             <label for="emailre">Email Address</label>
                         </div>
                         <div class="input-field" id="eemail">
@@ -172,8 +172,10 @@ class LoginSigup{
             this.validateAllDom(dom,"Please insert email! Email is required")
             return false
         }
-        else if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+        else if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+.(?:\.[a-zA-Z0-9-]+)$/.test(mail))
         {
+            console.log(mail)
+
             return (true)
         }
         this.validateAllDom(dom,"Email Invalid");

@@ -75,3 +75,8 @@ exports.getOneProduct = async(req,res)=>{
         res.json(result);
     })
 }
+exports.categoryProduct = async(req,res)=>{
+    await Product.find({category:req.params.id}).then(result=>{
+        res.json(result)
+    }).catch(err=>{res.status(400).json({result:false})})
+}

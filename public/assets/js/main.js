@@ -35,6 +35,7 @@ async function loadStyeAndScript(){
     }
 
 }
+loadStyeAndScript();
 window.addEventListener("DOMContentLoaded",loadStyeAndScript);
 function selector(dom){
     return document.querySelector(dom)

@@ -1,5 +1,6 @@
 class Dashboard{
     static dashboardUI(){
+        let location = window.location.origin+"/";
         return `        <header>
         <nav>
             <div class="nav-wrapper white navigation">
@@ -13,7 +14,7 @@ class Dashboard{
         </nav>
         <ul class="sidenav" id="mobile-demo">
             <li><a href="sass.html"><i class="fas fa-question"></i>Help</a></li>
-            <li><a href="badges.html"><i class="fas fa-user-plus"></i>Join</a></li>
+            <li><a onclick="Dashboard.goToPageLogin()"><i class="fas fa-user-plus"></i>Join</a></li>
             <li><a href=""><i><img src="assets/img/gift-card.png" alt="" width="20" style="vertical-align: middle;"></i><span>Copon Saving</span></a></li>
             <li><a href=""><i class="fas fa-truck"></i> Free Delivery</a></li>
             <li><a href=""><i class="fas fa-gift"></i>Gift Voucher</a></li>
@@ -50,7 +51,7 @@ class Dashboard{
                 <p class="description-card">Up to 60% off everyday</p>
                 <a href="">Shop Coupone</a>
             </div>
-            <img src="assets/img/icons8-coupon-100.png" alt="">
+            <img src="${location}assets/img/icons8-coupon-100.png" alt="">
         </div>
         <div class="card-body-custom d-flex" style="background-color: rgb(252, 149, 111);">
             <div class="card-text-custom ">
@@ -58,7 +59,7 @@ class Dashboard{
                 <p class="description-card">With selected items</p>
                 <a href="">Deliver Now</a>
             </div>
-            <img src="assets/img/checked-truck.png" alt="" class="delivery-img">
+            <img src="${location}assets/img/checked-truck.png" alt="" class="delivery-img">
         </div>
         <div class="card-body-custom d-flex" style="background-color: rgb(202, 75, 202);">
             <div class="card-text-custom">
@@ -66,16 +67,16 @@ class Dashboard{
                 <p class="description-card">With personal core items</p>
                 <a href="">Gift Now</a>
             </div>
-            <img src="assets/img/gift--v1.png" alt="" class="">
+            <img src="${location}assets/img/gift--v1.png" alt="" class="">
         </div>
     </div>
     <main class="d-flex">
         <div class="sidebar d-flex">
             <ul>
-                <li><a href="" class="d-flex"><img src="assets/img/icon_laptop.png" alt=""><h5 style="margin-right:10%">Electronics</h5></a></li>
-                <li ><a href="" class="d-flex"><img src="assets/img/icon_bag-front-view.png" alt=""><h5 style="margin-right:13%">Hand bags</h5></a></li>
-                <li><a href="" class="d-flex"><img src="assets/img/icon_wallet.png" alt=""><h5 style="margin-right:24%">Wallets</h5></a></li>
-                <li ><a href="" class="d-flex"><img src="assets/img/icon_clothes.png" alt=""><h5 style="margin-right:24%">Clothes</h5></a></li>
+                <li><a href="" class="d-flex"><img src="${location}assets/img/icon_laptop.png" alt=""><h5 style="margin-right:10%">Electronics</h5></a></li>
+                <li ><a href="" class="d-flex"><img src="${location}assets/img/icon_bag-front-view.png" alt=""><h5 style="margin-right:13%">Hand bags</h5></a></li>
+                <li><a href="" class="d-flex"><img src="${location}assets/img/icon_wallet.png" alt=""><h5 style="margin-right:24%">Wallets</h5></a></li>
+                <li ><a href="" class="d-flex"><img src="${location}assets/img/icon_clothes.png" alt=""><h5 style="margin-right:24%">Clothes</h5></a></li>
             </ul>
         </div>
         <div class="content-product">
@@ -134,6 +135,6 @@ class Dashboard{
                 fullWidth: true,
                 indicators: true});
             });
-        setTimeout(function(){$('.carousel').carousel('next')},3000)
+        setInterval(function(){$('.carousel').carousel('next')},3000)
     }
 }

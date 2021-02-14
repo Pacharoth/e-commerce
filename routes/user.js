@@ -2,7 +2,7 @@ const express = require('express');
 const route = express.Router();
 const routeUser = require('../controllers/authUser')
 
-route.get(['/admin','/login','/signup','/','/productdetail*'],routeUser.getDashboard);
+route.get(['/admin','/login','/signup','/','/productdetail*','/category/:id'],routeUser.getDashboard);
 route.post('/register',routeUser.registerUser);
 route.post('/login',routeUser.loginUser);
 route.post('/checkuser',routeUser.getUser);

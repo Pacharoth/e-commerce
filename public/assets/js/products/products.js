@@ -268,7 +268,11 @@ class Product{
     form.reset();
   }
 }
+
+
+
 class ProductHomepage{
+  static product=[]
   static loadProductUIList(){
     return `                <div class="row">
           <div class="card-product">
@@ -314,7 +318,6 @@ class ProductHomepage{
          
     `
   }
-
   static listAllProduct(product){
     let productContent = document.createElement("div");
     productContent.className="card-product";
@@ -327,9 +330,64 @@ class ProductHomepage{
   static async loadProductData(){
     await axios.get('/products').then(result=>{
       let res = result.data
-      for (let i = 0; i <res.length; i++) {
-        this.listAllProduct(res[i]);
+      let p=[];
+      if(res.length===0){
+        getElById("row").innerHTML="";
+        getElById("row").innerHTML=this.showResult();
+      }else{
+        for (let i = 0; i <res.length; i++) {
+          this.listAllProduct(res[i]);
+          
+          this.product.push({_id:res[i]._id,pname:res[i].pname,
+          pic:res[i].pic,price:res[i].price,detail:res[i].detail
+          ,category:res[i].category})
+        }
       }
+      console.log(this.product)
     })
+    
+  }
+  static showResult(){
+    return ` <div class="col s12 m12 l12" id="productdetail">    
+      <div class="card">
+      <div class="card-content">
+      <h3 class="grey-text">no result</h3>
+      </div>
+      </div>
+    </div> `
+  }
+  static searchProduct(pname){
+    console.log(pname)
+    let p=this.product.filter(result=>result.pname.toLowerCase().indexOf(pname.toLowerCase())!=-1)
+    console.log(p)
+    if(p.length===0){
+      getElById("row").innerHTML="";
+      getElById("row").innerHTML=this.showResult();
+    }else{
+      getElById("row").innerHTML="";
+      p.forEach(result=>this.listAllProduct(result))
+    }
+  }
+  static async loadProductCategory(name){
+    let name1 = name.toLowerCase();
+    let regex = new RegExp(`${name1}`,"g")
+    if(this.product.length===0){
+      getElById("row").innerHTML="";
+      getElById("row").innerHTML=this.showResult();
+    }else{
+      // console.log(this.product.filter(result=>result.category.toLowerCase().indexOf(name1)!==-1))
+      let p= false;
+      getElById("row").innerHTML="";
+      for(let i=0;i<this.product.length;i++){
+        if(regex.test(this.product[i].category.toLowerCase())){
+          this.listAllProduct(this.product[i]);
+          p=true
+        }
+      }
+      if(!p){
+        getElById("row").innerHTML="";
+        getElById("row").innerHTML=this.showResult();
+      }
+    }
   }
 }

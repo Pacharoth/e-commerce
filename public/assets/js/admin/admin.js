@@ -4,7 +4,7 @@ class AdminUI{
         return `      <header class="header">
         <nav>
           <div class="nav-wrapper blue lighten-1">
-            <a href="#!" class="brand-logo white-text text-darken-4" style="font-size:1.5rem; margin-left: 2%;">Awesome shop</a>
+            <a  onclick ="AdminUI.goHomepage()" class="brand-logo white-text text-darken-4" style="font-size:1.5rem; margin-left: 2%;">Awesome shop</a>
             <a href="#" data-target="sidebar" onclick="Product.navbar()" class="sidenav-trigger" ><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
               <li><a  onclick =AdminUI.goHomepage()>Home</a></li>

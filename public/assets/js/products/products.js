@@ -327,25 +327,33 @@ class ProductHomepage{
     productContent.appendChild(card);
     getElById("row").appendChild(productContent);
   }
-  static async loadProductData(){
-    await axios.get('/products').then(result=>{
+  static async loadProductInArray(){
+    // this.resetArray();
+    this.product=[]
+    await axios.get('/products').then(async(result)=>{
       let res = result.data
-      let p=[];
       if(res.length===0){
         getElById("row").innerHTML="";
         getElById("row").innerHTML=this.showResult();
       }else{
-        for (let i = 0; i <res.length; i++) {
-          this.listAllProduct(res[i]);
-          
+        for (let i = 0; i <res.length; i++){
           this.product.push({_id:res[i]._id,pname:res[i].pname,
           pic:res[i].pic,price:res[i].price,detail:res[i].detail
           ,category:res[i].category})
         }
       }
-      console.log(this.product)
     })
-    
+  }
+  static async loadProductData(){
+    await axios.get('/products').then(async(result)=>{
+      let res = result.data
+      if(res.length===0){
+        getElById("row").innerHTML="";
+        getElById("row").innerHTML=this.showResult();
+      }else{
+        res.forEach(result=>this.listAllProduct(result))
+      }
+    });
   }
   static showResult(){
     return ` <div class="col s12 m12 l12" id="productdetail">    
@@ -357,9 +365,9 @@ class ProductHomepage{
     </div> `
   }
   static searchProduct(pname){
-    console.log(pname)
+    // console.log(pname)
     let p=this.product.filter(result=>result.pname.toLowerCase().indexOf(pname.toLowerCase())!=-1)
-    console.log(p)
+    // console.log(p)
     if(p.length===0){
       getElById("row").innerHTML="";
       getElById("row").innerHTML=this.showResult();
@@ -368,14 +376,18 @@ class ProductHomepage{
       p.forEach(result=>this.listAllProduct(result))
     }
   }
+  static resetArray(){
+    this.product=[];
+  }
   static async loadProductCategory(name){
     let name1 = name.toLowerCase();
+    // console.log(this.product)
+
     let regex = new RegExp(`${name1}`,"g")
     if(this.product.length===0){
       getElById("row").innerHTML="";
       getElById("row").innerHTML=this.showResult();
     }else{
-      // console.log(this.product.filter(result=>result.category.toLowerCase().indexOf(name1)!==-1))
       let p= false;
       getElById("row").innerHTML="";
       for(let i=0;i<this.product.length;i++){

@@ -1,5 +1,6 @@
 class Dashboard{
     static dashboardUI(){
+        ProductHomepage.loadProductInArray();
         let location = window.location.origin+"/";
         return `        <header>
         <nav>
@@ -88,7 +89,7 @@ class Dashboard{
     </main> `
     }
     static handleSearchProduct(result){
-        console.log(result.value)
+        
         ProductHomepage.searchProduct(result.value);
         
     }
@@ -117,17 +118,17 @@ class Dashboard{
         getElById("row").innerHTML=this.contentProductDetail();
         ProductDetail.loadProductData(id)
     }
-    static async handleCart(id){
+    static handleCart(id){
         document.title="ProductDetail"
         history.pushState({},"ProductDetail","/productdetail?pid="+id);
         getElById("row").innerHTML="";
         getElById("row").innerHTML=this.contentProductDetail();
         ProductDetail.loadProductData(id);
       }
-    static loadAllProduct(){
+    static async loadAllProduct(){
         this.loadDashboardToRoot();
         this.loadCourselAndSidebar();
-        ProductHomepage.loadProductData();
+        await ProductHomepage.loadProductData();
     }
     static contentProduct(){
         return `<div class="card-product"></div>`

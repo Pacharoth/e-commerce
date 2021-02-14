@@ -33,6 +33,7 @@ async function routes(){
     else if(reg.test(path)){
         let search = new URLSearchParams(window.location.search)
         let id=search.get("pid")
+       
         console.log(search.get("pid"))
         document.title="ProductDetail";
         Dashboard.loadProductDetail(id);

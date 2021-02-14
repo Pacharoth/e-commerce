@@ -200,9 +200,9 @@ class ProductDetail{
         let form = new FormData();
         form.append("pid",id)
         await axios.get('comment/'+id).then(result=>{
-            console.log(result)
+            // console.log(result)
             for(let i =0;i<result.data.length;i++){
-                console.log(result.data[i])
+                // console.log(result.data[i])
                 getElById("productdetail").insertBefore(this.createComment(result.data[i]),getElById("comment").parentElement.parentElement)
             }
         })
@@ -232,7 +232,7 @@ class ProductDetail{
         let session;
         let search = new URLSearchParams(window.location.search)
         let id=search.get("pid")
-        console.log(id);
+        // console.log(id);
         let Form = new FormData(selector("#comment"));
         Form.append("pid",id);
         await axios.post("/session").then(result=>{
@@ -242,7 +242,7 @@ class ProductDetail{
             await axios.post('/comment',Form).then(result=>{
                 // console.log(result.data);
                 // let result=result.data
-                console.log(getElById("comment").parentElement.parentElement)
+                // console.log(getElById("comment").parentElement.parentElement)
                 getElById("productdetail").insertBefore(this.createComment(result.data),getElById("comment").parentElement.parentElement)
                 getElById("clearInput").value=""
                 // console.log(getElById("comment").parentElement.className)

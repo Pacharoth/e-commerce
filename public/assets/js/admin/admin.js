@@ -1,5 +1,6 @@
 class AdminUI{
     static AdminPage(){
+      let location = window.location.origin+"/";
         return `      <header class="header">
         <nav>
           <div class="nav-wrapper blue lighten-1">
@@ -18,7 +19,7 @@ class AdminUI{
             <div class="background">
               <img src="https://materializecss.com/images/office.jpg" alt="">
             </div>
-            <a><img class="circle" src="assets/img/download.png"></a>
+            <a><img class="circle" src="${location}assets/img/download.png"></a>
             <a><span class="white-text name" id="username">John Doe</span></a>
             <a ><span class="white-text email" id="email">jdandturk@gmail.com</span></a>
           </div>
@@ -42,7 +43,7 @@ class AdminUI{
             <div class="background">
               <img src="https://materializecss.com/images/office.jpg" alt="">
             </div>
-            <a href=""><img class="circle" src="assets/img/download.png"></a>
+            <a href=""><img class="circle" src="${location}assets/img/download.png"></a>
             <a href=""><span class="white-text name">John Doe</span></a>
             <a href=""><span class="white-text email">jdandturk@gmail.com</span></a>
           </div>

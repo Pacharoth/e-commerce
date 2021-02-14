@@ -132,14 +132,11 @@ class Product{
  `
   }
   static handleChange(event){
-    console.log(getElById("select").value)
+    // console.log(getElById("select").value)
   }
   static modal(){
       $('.modal').modal();
       $('select').formSelect();
-      
-       
-      
   }
   static navbar(){
       $('.sidenav').sidenav();
@@ -245,9 +242,9 @@ class Product{
     
   }
   static listProduct(product){
-    
+    let location = window.location.origin+"/"
     return `
-    <td><img class="materialboxed" src="${product.pic}" width=60></td>
+    <td><img class="materialboxed" src="${location+product.pic}" width=60></td>
     <td>${product.pname}</td>
     <td>${product.quantity}</td>
     <td>${product.detail}</td>
@@ -296,13 +293,14 @@ class ProductHomepage{
     </div>`
   }
   static putProductInDom(product){
+    let location= window.location.origin+"/";
     return ` 
       
           <div class="card-content">
               
           <span class="card-title activator grey-text text-darken-4">${product.pname}<i class="material-icons right">more_vert</i></span>
           <div class="card-img waves-effect waves-block waves-light">
-              <img class="responsive-img " src="${product.pic}" class="img1" alt="">
+              <img class="responsive-img " src="${location+product.pic}" class="img1" alt="">
               
           </div>
           <h4 class="center">${product.price}$</h4>

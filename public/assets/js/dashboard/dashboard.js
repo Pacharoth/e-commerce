@@ -39,9 +39,9 @@ class Dashboard{
             </div>
         </form>
         </div>
-        <div class="carousel-item red white-text clothes" href="#one!">
+        <div class="carousel-item white-text clothes" href="#one!">
         </div>
-        <div class="carousel-item amber white-text electronic" href="#two!">
+        <div class="carousel-item white-text electronic" href="#two!">
         </div>
     </div>
     <div class="card-content-custom d-flex">
